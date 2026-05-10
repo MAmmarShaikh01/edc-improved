@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electronic Devices & Circuits — Complete Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --card: #1a1e2a;
+    --border: #252a38;
+    --accent1: #f7c948;   /* gold */
+    --accent2: #4fc3f7;   /* sky blue */
+    --accent3: #81c784;   /* green */
+    --accent4: #ff8a65;   /* orange */
+    --accent5: #ce93d8;   /* purple */
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --highlight: #fff9e6;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,15,20,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 24px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  nav a {
+    color: var(--muted); text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .06em;
+    padding: 4px 10px; border-radius: 20px;
+    border: 1px solid var(--border);
+    transition: all .2s;
+  }
+  nav a:hover { color: var(--accent1); border-color: var(--accent1); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d0f14 0%, #0f1520 50%, #0d0f14 100%);
+    padding: 80px 40px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(247,201,72,.07) 0%, transparent 70%);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    font-weight: 900; color: var(--accent1);
+    text-shadow: 0 0 60px rgba(247,201,72,.3);
+    margin-bottom: 12px;
+  }
+  .hero p { color: var(--muted); font-size: 1rem; max-width: 600px; margin: 0 auto 20px; }
+  .hero .meta {
+    display: inline-flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; font-size: .82rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .hero .meta span {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 4px 14px; border-radius: 20px; color: var(--accent2);
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── SECTION ── */
+  .section {
+    margin: 60px 0;
+    border-left: 3px solid var(--accent1);
+    padding-left: 28px;
+  }
+  .section.blue  { border-color: var(--accent2); }
+  .section.green { border-color: var(--accent3); }
+  .section.orange{ border-color: var(--accent4); }
+  .section.purple{ border-color: var(--accent5); }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent1); margin-bottom: 6px;
+  }
+  .section.blue  .section-tag { color: var(--accent2); }
+  .section.green .section-tag { color: var(--accent3); }
+  .section.orange .section-tag{ color: var(--accent4); }
+  .section.purple .section-tag{ color: var(--accent5); }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    color: var(--text); margin-bottom: 18px;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--accent2);
+    margin: 28px 0 10px;
+  }
+  .section.green h3  { color: var(--accent3); }
+  .section.orange h3 { color: var(--accent4); }
+  .section.purple h3 { color: var(--accent5); }
+  .section h3:first-of-type { margin-top: 0; }
+  h4 { font-size: 1rem; color: var(--accent1); margin: 18px 0 6px; font-style: italic; }
+
+  p { margin-bottom: 14px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 18px 0;
+  }
+  .card.gold  { border-left: 4px solid var(--accent1); }
+  .card.blue  { border-left: 4px solid var(--accent2); }
+  .card.green { border-left: 4px solid var(--accent3); }
+  .card.orange{ border-left: 4px solid var(--accent4); }
+  .card.purple{ border-left: 4px solid var(--accent5); }
+
+  .mnemonic {
+    background: linear-gradient(135deg, #1a1600, #1e1800);
+    border: 1px solid #4a3a00;
+    border-left: 4px solid var(--accent1);
+    border-radius: 8px; padding: 16px 20px; margin: 14px 0;
+  }
+  .mnemonic .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem; color: var(--accent1);
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .mnemonic .text { font-size: 1.05rem; color: var(--highlight); font-weight: 600; }
+  .mnemonic .explain { font-size: .9rem; color: var(--muted); margin-top: 6px; }
+
+  .example-box {
+    background: #0f1f18;
+    border: 1px solid #1e3d2a;
+    border-left: 4px solid var(--accent3);
+    border-radius: 8px; padding: 16px 20px; margin: 14px 0;
+  }
+  .example-box .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem; color: var(--accent3);
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px;
+  }
+
+  .formula {
+    font-family: 'JetBrains Mono', monospace;
+    background: #111520; border: 1px solid var(--border);
+    border-radius: 6px; padding: 10px 16px; margin: 10px 0;
+    color: var(--accent2); font-size: .97rem;
+  }
+
+  /* ── DEFINITION BOX ── */
+  .def {
+    background: #13182a;
+    border: 1px solid #2a3560;
+    border-left: 4px solid var(--accent2);
+    border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  }
+  .def strong { color: var(--accent2); }
+
+  /* ── SVG DIAGRAMS ── */
+  .diagram-wrap {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+    margin: 20px 0; text-align: center; overflow-x: auto;
+  }
+  .diagram-wrap .caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem; color: var(--muted);
+    margin-top: 12px; letter-spacing: .04em;
+  }
+  svg text { font-family: 'JetBrains Mono', monospace; }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .92rem; }
+  th {
+    background: var(--surface);
+    color: var(--accent1);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem; letter-spacing: .06em;
+    text-transform: uppercase; padding: 10px 14px;
+    border-bottom: 2px solid var(--border); text-align: left;
+  }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+  tr:hover td { background: rgba(255,255,255,.02); }
+
+  /* ── QUIZ ── */
+  .qbox {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 24px; margin: 16px 0;
+  }
+  .qbox .q { color: var(--accent1); font-weight: 600; margin-bottom: 10px; }
+  .qbox .a { color: var(--text); border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 10px; }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+  .section-divider { text-align: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: .8rem; letter-spacing: .2em; margin: 50px 0; }
+
+  /* ── LIST ── */
+  ul, ol { padding-left: 24px; margin-bottom: 14px; }
+  li { margin-bottom: 5px; }
+  li::marker { color: var(--accent1); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media(max-width:600px){
+    .hero { padding: 50px 20px 40px; }
+    .section { padding-left: 16px; }
+    .container { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#unit0">⚛ Electrons</a>
+  <a href="#unit1">🔬 Materials</a>
+  <a href="#unit2">💡 Diodes</a>
+  <a href="#unit3">🔌 Transistors</a>
+  <a href="#unit4">📈 Amplifiers</a>
+  <a href="#unit5">📐 Q-Point</a>
+</nav>
+
+<div class="hero">
+  <h1>Electronic Devices &amp; Circuits</h1>
+  <p>A complete, from-scratch study guide for DASC-316 / GNAS-316 — with diagrams, mnemonics, worked examples &amp; real-life analogies</p>
+  <div class="meta">
+    <span>Batch 2k20–2k25</span>
+    <span>Subject: Kundan Kumar</span>
+    <span>Dept: IT &amp; Data Science</span>
+    <span>Conventional Current ✓</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- UNIT 0 : THE ELECTRON — ABSOLUTE BASICS               -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="unit0" class="section">
+  <div class="section-tag">Before Everything — Prerequisite</div>
+  <h2>⚛ Understanding Electrons &amp; Current</h2>
+
+  <h3>What is an Atom?</h3>
+  <p>Everything around you — your phone, a wire, a piece of silicon — is made of <strong>atoms</strong>. An atom has three parts:</p>
+  <ul>
+    <li><strong>Nucleus</strong> — centre of the atom, contains <em>protons</em> (+) and <em>neutrons</em> (neutral)</li>
+    <li><strong>Electrons</strong> — tiny negatively charged particles that orbit the nucleus in <em>shells</em></li>
+  </ul>
+
+  <div class="diagram-wrap">
+    <!-- Atom diagram -->
+    <svg viewBox="0 0 420 280" width="420" height="280" xmlns="http://www.w3.org/2000/svg">
+      <!-- Nucleus -->
+      <circle cx="210" cy="140" r="30" fill="#f7c948" opacity="0.9"/>
+      <text x="210" y="135" text-anchor="middle" fill="#0d0f14" font-size="10" font-weight="bold">Nucleus</text>
+      <text x="210" y="148" text-anchor="middle" fill="#0d0f14" font-size="9">P+ &amp; N</text>
+      <!-- Orbit 1 -->
+      <ellipse cx="210" cy="140" rx="70" ry="40" fill="none" stroke="#4fc3f7" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+      <!-- Electron on orbit 1 -->
+      <circle cx="280" cy="140" r="8" fill="#4fc3f7"/>
+      <text x="280" y="144" text-anchor="middle" fill="#0d0f14" font-size="9">e-</text>
+      <circle cx="140" cy="140" r="8" fill="#4fc3f7"/>
+      <text x="140" y="144" text-anchor="middle" fill="#0d0f14" font-size="9">e-</text>
+      <!-- Orbit 2 -->
+      <ellipse cx="210" cy="140" rx="120" ry="70" fill="none" stroke="#81c784" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+      <!-- Electrons on orbit 2 -->
+      <circle cx="330" cy="140" r="8" fill="#81c784"/>
+      <text x="330" y="144" text-anchor="middle" fill="#0d0f14" font-size="9">e-</text>
+      <circle cx="90" cy="140" r="8" fill="#81c784"/>
+      <text x="90" y="144" text-anchor="middle" fill="#0d0f14" font-size="9">e-</text>
+      <circle cx="210" cy="70" r="8" fill="#81c784"/>
+      <text x="210" y="74" text-anchor="middle" fill="#0d0f14" font-size="9">e-</text>
+      <circle cx="210" cy="210" r="8" fill="#81c784"/>
+      <text x="210" y="214" text-anchor="middle" fill="#0d0f14" font-size="9">e-</text>
+      <!-- Labels -->
+      <text x="295" y="110" fill="#4fc3f7" font-size="11">1st Shell</text>
+      <text x="340" y="85" fill="#81c784" font-size="11">2nd Shell</text>
+      <text x="10" y="30" fill="#e8eaf0" font-size="12" font-weight="bold">Atomic Structure</text>
+      <!-- Arrow pointing to nucleus label -->
+      <text x="210" y="268" text-anchor="middle" fill="#8892a4" font-size="10">Outermost electrons = VALENCE electrons</text>
+    </svg>
+    <div class="caption">Fig 0.1 — Basic atom structure. Outermost shell electrons are called Valence Electrons.</div>
+  </div>
+
+  <div class="def">
+    <strong>Valence Electrons</strong> — The electrons in the <em>outermost shell</em> of an atom. These are the ones that can break free and move, creating electricity. The fewer the valence electrons are held, the easier they move.
+  </div>
+
+  <h3>What is Electric Current?</h3>
+  <p>When valence electrons <em>break free</em> and drift through a material, that movement of charge is called <strong>electric current</strong>.</p>
+
+  <div class="card gold">
+    <h4>⚡ Conventional Current vs. Electron Flow — The Most Important Distinction</h4>
+    <p>Historically (before electrons were discovered), scientists assumed current flowed from <strong>positive (+) to negative (−)</strong>. This is called <strong>Conventional Current</strong>.</p>
+    <p>In reality, <em>electrons</em> (negative charge) move from <strong>negative (−) to positive (+)</strong>. This is called <strong>Electron Flow</strong>.</p>
+    <p><strong>In this entire course, we use CONVENTIONAL CURRENT.</strong> So when you see an arrow in a circuit, it means conventional current goes in that direction (+ to −), even though electrons physically move the opposite way.</p>
+  </div>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 500 160" width="500" height="160" xmlns="http://www.w3.org/2000/svg">
+      <!-- Battery -->
+      <rect x="10" y="50" width="30" height="60" rx="4" fill="#1a1e2a" stroke="#f7c948" stroke-width="2"/>
+      <text x="25" y="72" text-anchor="middle" fill="#f7c948" font-size="11" font-weight="bold">+</text>
+      <text x="25" y="98" text-anchor="middle" fill="#4fc3f7" font-size="11" font-weight="bold">−</text>
+      <text x="25" y="130" text-anchor="middle" fill="#8892a4" font-size="9">Battery</text>
+
+      <!-- Wire top -->
+      <line x1="40" y1="60" x2="460" y2="60" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Wire bottom -->
+      <line x1="40" y1="100" x2="460" y2="100" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Resistor on top wire -->
+      <rect x="200" y="50" width="60" height="20" rx="4" fill="#1a1e2a" stroke="#ff8a65" stroke-width="2"/>
+      <text x="230" y="64" text-anchor="middle" fill="#ff8a65" font-size="10">Resistor</text>
+      <!-- Right side wire -->
+      <line x1="460" y1="60" x2="460" y2="100" stroke="#e8eaf0" stroke-width="2"/>
+
+      <!-- Conventional current arrow (top, + to −, left to right) -->
+      <defs>
+        <marker id="arr_gold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#f7c948"/>
+        </marker>
+        <marker id="arr_blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#4fc3f7"/>
+        </marker>
+      </defs>
+      <line x1="80" y1="52" x2="160" y2="52" stroke="#f7c948" stroke-width="2" marker-end="url(#arr_gold)"/>
+      <text x="120" y="44" text-anchor="middle" fill="#f7c948" font-size="9">Conventional Current →</text>
+
+      <!-- Electron flow arrow (bottom, − to +, right to left) -->
+      <line x1="400" y1="108" x2="320" y2="108" stroke="#4fc3f7" stroke-width="2" marker-end="url(#arr_blue)"/>
+      <text x="360" y="122" text-anchor="middle" fill="#4fc3f7" font-size="9">← Electron Flow</text>
+
+      <text x="250" y="150" text-anchor="middle" fill="#8892a4" font-size="10">Both describe the SAME current — just opposite directions!</text>
+    </svg>
+    <div class="caption">Fig 0.2 — Conventional current flows from + to −. Electrons physically move from − to +. We always use conventional current.</div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Mnemonic</div>
+    <div class="text">"Conventional = Civilised (positive goes first, like a gentleman)"</div>
+    <div class="explain">In conventions (rules of society), positive people lead. Conventional current = + leads, goes to −. Electrons are rebels — they go the other way.</div>
+  </div>
+
+  <div class="formula">Current (I) = Charge (Q) / Time (t) &nbsp;→&nbsp; I = Q/t &nbsp;[Amperes = Coulombs/second]</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- UNIT 1 : MATERIALS                                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="unit1" class="section blue">
+  <div class="section-tag">Topic 1</div>
+  <h2>🔬 Materials Used in Electronics — Conductivity</h2>
+
+  <h3>The Three Types of Materials</h3>
+  <p>Every material can be classified by how easily it allows electrons to flow through it. This is measured by <strong>conductivity</strong> (σ, sigma) — how well a material conducts electricity.</p>
+
+  <table>
+    <tr>
+      <th>Property</th><th>Conductor</th><th>Semiconductor</th><th>Insulator</th>
+    </tr>
+    <tr><td>Example</td><td>Copper, Silver, Gold</td><td>Silicon, Germanium</td><td>Rubber, Glass, Air</td></tr>
+    <tr><td>Valence electrons</td><td>1 (loosely held)</td><td>4 (moderately held)</td><td>8 (tightly held)</td></tr>
+    <tr><td>Conductivity (σ)</td><td>Very High (10⁶ S/m)</td><td>Moderate (10⁻⁴ to 10⁴)</td><td>Near Zero (&lt;10⁻⁸)</td></tr>
+    <tr><td>Band Gap</td><td>Zero (overlap)</td><td>Small (0.7–1.1 eV)</td><td>Large (&gt;5 eV)</td></tr>
+    <tr><td>Use in electronics</td><td>Wires, contacts</td><td>Diodes, transistors</td><td>Wire coating, PCB base</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Mnemonic</div>
+    <div class="text">"C-S-I like Crime Scene Investigation: Conductor, Semiconductor, Insulator"</div>
+    <div class="explain">Conductors = free to move (easy crime). Semiconductors = can be controlled (detective). Insulators = no movement (crime stopped).</div>
+  </div>
+
+  <h3>Energy Band Theory — Why Materials Differ</h3>
+  <p>Electrons exist in <strong>energy bands</strong>. Think of these like floors in a building:</p>
+  <ul>
+    <li><strong>Valence Band</strong> — The ground floor where electrons normally sit (bound to atoms)</li>
+    <li><strong>Conduction Band</strong> — The floor above, where electrons are free to move (conduct electricity)</li>
+    <li><strong>Band Gap</strong> — The gap between them; electrons must jump this gap to conduct</li>
+  </ul>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 500 260" width="500" height="260" xmlns="http://www.w3.org/2000/svg">
+      <!-- Conductor -->
+      <rect x="30" y="30" width="120" height="30" rx="4" fill="#f7c948" opacity="0.8"/>
+      <text x="90" y="50" text-anchor="middle" fill="#0d0f14" font-size="10" font-weight="bold">Conduction Band</text>
+      <!-- overlap indicator -->
+      <rect x="30" y="55" width="120" height="15" rx="0" fill="#f7c948" opacity="0.4"/>
+      <rect x="30" y="65" width="120" height="30" rx="4" fill="#ff8a65" opacity="0.8"/>
+      <text x="90" y="85" text-anchor="middle" fill="#0d0f14" font-size="10" font-weight="bold">Valence Band</text>
+      <text x="90" y="120" text-anchor="middle" fill="#f7c948" font-size="11" font-weight="bold">CONDUCTOR</text>
+      <text x="90" y="135" text-anchor="middle" fill="#8892a4" font-size="9">Bands OVERLAP</text>
+      <text x="90" y="148" text-anchor="middle" fill="#8892a4" font-size="9">No gap → free electrons</text>
+
+      <!-- Semiconductor -->
+      <rect x="190" y="30" width="120" height="30" rx="4" fill="#4fc3f7" opacity="0.8"/>
+      <text x="250" y="50" text-anchor="middle" fill="#0d0f14" font-size="10" font-weight="bold">Conduction Band</text>
+      <!-- small gap -->
+      <text x="250" y="75" text-anchor="middle" fill="#81c784" font-size="10">↕ Small gap ~1 eV</text>
+      <rect x="190" y="85" width="120" height="30" rx="4" fill="#ff8a65" opacity="0.8"/>
+      <text x="250" y="105" text-anchor="middle" fill="#0d0f14" font-size="10" font-weight="bold">Valence Band</text>
+      <text x="250" y="130" text-anchor="middle" fill="#4fc3f7" font-size="11" font-weight="bold">SEMICONDUCTOR</text>
+      <text x="250" y="145" text-anchor="middle" fill="#8892a4" font-size="9">Small gap → jumpable</text>
+      <text x="250" y="158" text-anchor="middle" fill="#8892a4" font-size="9">with heat/light/doping</text>
+
+      <!-- Insulator -->
+      <rect x="350" y="20" width="120" height="30" rx="4" fill="#ce93d8" opacity="0.8"/>
+      <text x="410" y="40" text-anchor="middle" fill="#0d0f14" font-size="10" font-weight="bold">Conduction Band</text>
+      <!-- big gap -->
+      <text x="410" y="70" text-anchor="middle" fill="#ce93d8" font-size="10">↕ Large gap &gt;5 eV</text>
+      <text x="410" y="85" text-anchor="middle" fill="#ce93d8" font-size="10">(can't jump!)</text>
+      <rect x="350" y="95" width="120" height="30" rx="4" fill="#ff8a65" opacity="0.8"/>
+      <text x="410" y="115" text-anchor="middle" fill="#0d0f14" font-size="10" font-weight="bold">Valence Band</text>
+      <text x="410" y="140" text-anchor="middle" fill="#ce93d8" font-size="11" font-weight="bold">INSULATOR</text>
+      <text x="410" y="155" text-anchor="middle" fill="#8892a4" font-size="9">Huge gap → no conduction</text>
+
+      <text x="250" y="220" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="bold">Energy Band Diagram Comparison</text>
+      <text x="250" y="240" text-anchor="middle" fill="#8892a4" font-size="10">eV = electron volt (unit of energy for tiny particles)</text>
+    </svg>
+    <div class="caption">Fig 1.1 — Energy band diagram for conductors, semiconductors, and insulators</div>
+  </div>
+
+  <h3>Semiconductors in Depth — Why They're Special</h3>
+  <p>Semiconductors are the heart of all electronics. Pure silicon has <strong>4 valence electrons</strong> and forms a <em>covalent bond</em> lattice with neighbouring atoms. At room temperature, a few electrons gain enough thermal energy to jump to the conduction band, leaving behind a <strong>hole</strong> (positive vacancy).</p>
+
+  <div class="def">
+    <strong>Hole</strong> — When an electron leaves its position in the valence band, it leaves a positive vacancy called a "hole." Holes move in the <em>opposite</em> direction to electrons. In conventional current, we track hole movement.
+  </div>
+
+  <div class="example-box">
+    <div class="label">🌍 Real-Life Analogy</div>
+    <p><strong>Holes moving through a lattice</strong> = Like a row of seats in a cinema where one person (electron) moves left. The empty seat (hole) appears to move right! The people didn't move right — but the <em>empty space</em> did. That's exactly how holes work.</p>
+  </div>
+
+  <h3>Doping — Making Semiconductors Useful</h3>
+  <p>Pure silicon (intrinsic semiconductor) has very few free carriers. We <strong>dope</strong> it — add tiny amounts of impurities — to control conductivity. This creates <strong>extrinsic semiconductors</strong>.</p>
+
+  <div class="card blue">
+    <h4>N-Type Semiconductor</h4>
+    <p>Add an element with <strong>5 valence electrons</strong> (like <em>Phosphorus, Arsenic</em>) to silicon (4 valence electrons). 4 electrons bond with silicon neighbors; the 5th is <em>free</em> to move. Majority carriers = <strong>electrons (negative)</strong>.</p>
+    <p>🧠 <strong>Mnemonic:</strong> <em>"N = Negative = extra electron = Nitrogen-like (5 valence) dopant"</em></p>
+  </div>
+
+  <div class="card orange">
+    <h4>P-Type Semiconductor</h4>
+    <p>Add an element with <strong>3 valence electrons</strong> (like <em>Boron, Aluminium</em>) to silicon. Only 3 bonds form, leaving one bond incomplete — a <strong>hole</strong>. Majority carriers = <strong>holes (positive)</strong>.</p>
+    <p>🧠 <strong>Mnemonic:</strong> <em>"P = Positive = hole = Boron (3 valence) dopant = DEFICIENT"</em></p>
+  </div>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 520 220" width="520" height="220" xmlns="http://www.w3.org/2000/svg">
+      <!-- N-type lattice -->
+      <!-- Silicon atoms -->
+      <g fill="#4fc3f7" opacity="0.8">
+        <circle cx="60" cy="60" r="18"/><text x="60" y="64" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="130" cy="60" r="18"/><text x="130" y="64" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="200" cy="60" r="18"/><text x="200" y="64" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="60" cy="130" r="18"/><text x="60" y="134" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="200" cy="130" r="18"/><text x="200" y="134" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="60" cy="200" r="18"/><text x="60" y="204" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="130" cy="200" r="18"/><text x="130" y="204" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="200" cy="200" r="18"/><text x="200" y="204" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+      </g>
+      <!-- Phosphorus dopant in center -->
+      <circle cx="130" cy="130" r="20" fill="#f7c948"/>
+      <text x="130" y="134" text-anchor="middle" fill="#0d0f14" font-size="9" font-weight="bold">P(5)</text>
+      <!-- Free electron -->
+      <circle cx="168" cy="105" r="9" fill="#81c784"/>
+      <text x="168" y="109" text-anchor="middle" fill="#0d0f14" font-size="8">e-</text>
+      <text x="168" y="94" text-anchor="middle" fill="#81c784" font-size="8">FREE!</text>
+      <!-- Bonds (simplified lines) -->
+      <line x1="78" y1="60" x2="112" y2="60" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="148" y1="60" x2="182" y2="60" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="60" y1="78" x2="60" y2="112" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="200" y1="78" x2="200" y2="112" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="60" y1="148" x2="60" y2="182" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="200" y1="148" x2="200" y2="182" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="78" y1="200" x2="112" y2="200" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="148" y1="200" x2="182" y2="200" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="78" y1="130" x2="110" y2="130" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="150" y1="130" x2="182" y2="130" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="130" y1="78" x2="130" y2="110" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <line x1="130" y1="150" x2="130" y2="182" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <text x="130" y="18" text-anchor="middle" fill="#4fc3f7" font-size="12" font-weight="bold">N-Type (Phosphorus doped)</text>
+
+      <!-- P-type -->
+      <g fill="#ff8a65" opacity="0.8">
+        <circle cx="310" cy="60" r="18"/><text x="310" y="64" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="380" cy="60" r="18"/><text x="380" y="64" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="450" cy="60" r="18"/><text x="450" y="64" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="310" cy="130" r="18"/><text x="310" y="134" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="450" cy="130" r="18"/><text x="450" y="134" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="310" cy="200" r="18"/><text x="310" y="204" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="380" cy="200" r="18"/><text x="380" y="204" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+        <circle cx="450" cy="200" r="18"/><text x="450" y="204" text-anchor="middle" fill="#0d0f14" font-size="9">Si</text>
+      </g>
+      <!-- Boron dopant -->
+      <circle cx="380" cy="130" r="20" fill="#ce93d8"/>
+      <text x="380" y="134" text-anchor="middle" fill="#0d0f14" font-size="9" font-weight="bold">B(3)</text>
+      <!-- Hole -->
+      <circle cx="418" cy="105" r="9" fill="none" stroke="#f7c948" stroke-width="2" stroke-dasharray="3,2"/>
+      <text x="418" y="109" text-anchor="middle" fill="#f7c948" font-size="9">+</text>
+      <text x="418" y="94" text-anchor="middle" fill="#f7c948" font-size="8">HOLE!</text>
+      <text x="380" y="18" text-anchor="middle" fill="#ff8a65" font-size="12" font-weight="bold">P-Type (Boron doped)</text>
+    </svg>
+    <div class="caption">Fig 1.2 — N-type has a free electron (extra carrier); P-type has a hole (missing electron = positive vacancy)</div>
+  </div>
+
+  <div class="qbox">
+    <div class="q">Q: Why is silicon preferred over germanium in modern devices?</div>
+    <div class="a"><strong>A:</strong> Silicon has a larger band gap (1.1 eV vs 0.66 eV for Ge), so it can work at higher temperatures without breakdown. It also forms a stable oxide (SiO₂) used as insulation in ICs. Silicon is also abundantly available (it's sand!). Real-life: your phone's processor is pure silicon technology.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- UNIT 2 : DIODE                                         -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="unit2" class="section green">
+  <div class="section-tag">Topic 2</div>
+  <h2>💡 The Diode</h2>
+
+  <h3>What is a P-N Junction?</h3>
+  <p>When a P-type and N-type semiconductor are joined together, they form a <strong>P-N junction</strong> — the basis of all diodes. At the junction, electrons from the N-side diffuse to fill holes on the P-side. This creates a region depleted of carriers called the <strong>depletion region</strong>, which acts like a barrier.</p>
+
+  <div class="def">
+    <strong>Built-in Potential (V₀)</strong> — The electric field created across the depletion region. For silicon: ~0.7V. For germanium: ~0.3V. This is the "barrier" that must be overcome before current flows.
+  </div>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 520 200" width="520" height="200" xmlns="http://www.w3.org/2000/svg">
+      <!-- P region -->
+      <rect x="20" y="60" width="180" height="80" rx="6" fill="#ff8a65" opacity="0.3" stroke="#ff8a65" stroke-width="1.5"/>
+      <text x="110" y="95" text-anchor="middle" fill="#ff8a65" font-size="14" font-weight="bold">P-type</text>
+      <text x="110" y="112" text-anchor="middle" fill="#ff8a65" font-size="10">Holes (+) majority</text>
+      <!-- N region -->
+      <rect x="300" y="60" width="180" height="80" rx="6" fill="#4fc3f7" opacity="0.3" stroke="#4fc3f7" stroke-width="1.5"/>
+      <text x="390" y="95" text-anchor="middle" fill="#4fc3f7" font-size="14" font-weight="bold">N-type</text>
+      <text x="390" y="112" text-anchor="middle" fill="#4fc3f7" font-size="10">Electrons (−) majority</text>
+      <!-- Depletion region -->
+      <rect x="196" y="60" width="108" height="80" rx="0" fill="#ce93d8" opacity="0.2" stroke="#ce93d8" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="250" y="88" text-anchor="middle" fill="#ce93d8" font-size="10" font-weight="bold">Depletion</text>
+      <text x="250" y="102" text-anchor="middle" fill="#ce93d8" font-size="10">Region</text>
+      <text x="250" y="116" text-anchor="middle" fill="#ce93d8" font-size="9">(no free carriers)</text>
+      <!-- + and - charges in depletion -->
+      <text x="215" y="100" text-anchor="middle" fill="#ce93d8" font-size="14">− −</text>
+      <text x="285" y="100" text-anchor="middle" fill="#ce93d8" font-size="14">+ +</text>
+      <!-- Arrow showing built-in field -->
+      <defs>
+        <marker id="arr_purple" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L7,3 z" fill="#ce93d8"/>
+        </marker>
+      </defs>
+      <line x1="290" y1="155" x2="215" y2="155" stroke="#ce93d8" stroke-width="1.5" marker-end="url(#arr_purple)"/>
+      <text x="250" y="172" text-anchor="middle" fill="#ce93d8" font-size="9">Built-in Electric Field (N→P direction)</text>
+
+      <!-- Labels -->
+      <text x="260" y="30" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="bold">P-N Junction at Equilibrium</text>
+      <!-- Anode / Cathode labels -->
+      <text x="30" y="50" fill="#ff8a65" font-size="10">Anode (A)</text>
+      <text x="430" y="50" fill="#4fc3f7" font-size="10">Cathode (K)</text>
+    </svg>
+    <div class="caption">Fig 2.1 — P-N Junction: depletion region forms at the boundary. Built-in field opposes further diffusion.</div>
+  </div>
+
+  <h3>Diode Biasing — Forward and Reverse</h3>
+
+  <div class="card green">
+    <h4>Forward Bias (Diode ON)</h4>
+    <p>Connect the <strong>positive terminal (+) of battery to the P-side (Anode)</strong> and negative to N-side. The battery pushes holes toward the junction and electrons toward the junction from the other side. When battery voltage &gt; 0.7V (Si) or 0.3V (Ge), the barrier is overcome and <strong>large current flows</strong>.</p>
+    <p>Think of it like: the battery is a bulldozer pushing the "wall" (depletion region) until it breaks through.</p>
+  </div>
+
+  <div class="card orange">
+    <h4>Reverse Bias (Diode OFF)</h4>
+    <p>Connect <strong>positive terminal (+) to N-side</strong> and negative to P-side. This <em>widens</em> the depletion region. Practically <strong>no current flows</strong> (only a tiny leakage current of microamperes).</p>
+    <p>The depletion region grows wider — the wall gets thicker and stronger.</p>
+  </div>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 540 240" width="540" height="240" xmlns="http://www.w3.org/2000/svg">
+      <!-- Forward bias circuit -->
+      <text x="130" y="20" text-anchor="middle" fill="#81c784" font-size="12" font-weight="bold">Forward Bias</text>
+      <!-- Battery -->
+      <rect x="15" y="80" width="24" height="60" rx="3" fill="#1a1e2a" stroke="#81c784" stroke-width="1.5"/>
+      <text x="27" y="102" text-anchor="middle" fill="#81c784" font-size="10" font-weight="bold">+</text>
+      <text x="27" y="126" text-anchor="middle" fill="#4fc3f7" font-size="10" font-weight="bold">−</text>
+      <!-- Wires -->
+      <line x1="39" y1="90" x2="80" y2="90" stroke="#81c784" stroke-width="2"/>
+      <line x1="39" y1="130" x2="80" y2="130" stroke="#4fc3f7" stroke-width="2"/>
+      <line x1="185" y1="90" x2="230" y2="90" stroke="#81c784" stroke-width="2"/>
+      <line x1="185" y1="130" x2="230" y2="130" stroke="#4fc3f7" stroke-width="2"/>
+      <line x1="230" y1="90" x2="230" y2="130" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Diode symbol -->
+      <polygon points="80,80 80,140 140,110" fill="#81c784" opacity="0.8"/>
+      <line x1="140" y1="80" x2="140" y2="140" stroke="#81c784" stroke-width="2.5"/>
+      <line x1="140" y1="110" x2="185" y2="110" stroke="#81c784" stroke-width="2"/>
+      <line x1="80" y1="110" x2="80" y2="90" stroke="#81c784" stroke-width="2"/>
+      <text x="110" y="165" text-anchor="middle" fill="#81c784" font-size="10">P→N direction</text>
+      <text x="110" y="180" text-anchor="middle" fill="#8892a4" font-size="9">Current FLOWS ✓</text>
+      <!-- Current arrow -->
+      <defs>
+        <marker id="arr_green" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L7,3 z" fill="#81c784"/>
+        </marker>
+      </defs>
+      <line x1="195" y1="83" x2="155" y2="83" stroke="#81c784" stroke-width="1.5" marker-end="url(#arr_green)"/>
+      <text x="175" y="76" text-anchor="middle" fill="#81c784" font-size="8">I →</text>
+
+      <!-- Reverse bias circuit -->
+      <text x="400" y="20" text-anchor="middle" fill="#ff8a65" font-size="12" font-weight="bold">Reverse Bias</text>
+      <rect x="285" y="80" width="24" height="60" rx="3" fill="#1a1e2a" stroke="#ff8a65" stroke-width="1.5"/>
+      <text x="297" y="102" text-anchor="middle" fill="#ff8a65" font-size="10" font-weight="bold">+</text>
+      <text x="297" y="126" text-anchor="middle" fill="#4fc3f7" font-size="10" font-weight="bold">−</text>
+      <!-- Wires -->
+      <line x1="309" y1="90" x2="350" y2="90" stroke="#ff8a65" stroke-width="2"/>
+      <line x1="309" y1="130" x2="350" y2="130" stroke="#4fc3f7" stroke-width="2"/>
+      <line x1="455" y1="90" x2="500" y2="90" stroke="#ff8a65" stroke-width="2"/>
+      <line x1="455" y1="130" x2="500" y2="130" stroke="#4fc3f7" stroke-width="2"/>
+      <line x1="500" y1="90" x2="500" y2="130" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Diode symbol (flipped — + goes to N-side) -->
+      <polygon points="350,80 350,140 410,110" fill="#ff8a65" opacity="0.5"/>
+      <line x1="410" y1="80" x2="410" y2="140" stroke="#ff8a65" stroke-width="2.5"/>
+      <line x1="350" y1="110" x2="350" y2="90" stroke="#ff8a65" stroke-width="2"/>
+      <line x1="410" y1="110" x2="455" y2="110" stroke="#ff8a65" stroke-width="2"/>
+      <text x="400" y="165" text-anchor="middle" fill="#ff8a65" font-size="10">+ to N-side</text>
+      <text x="400" y="180" text-anchor="middle" fill="#8892a4" font-size="9">Current BLOCKED ✗</text>
+      <!-- X mark -->
+      <text x="430" y="100" fill="#ff8a65" font-size="18">✕</text>
+
+      <!-- Diode symbol legend -->
+      <text x="270" y="220" text-anchor="middle" fill="#e8eaf0" font-size="11">▶| = Diode symbol. Tip of triangle = Anode (P). Bar = Cathode (N).</text>
+    </svg>
+    <div class="caption">Fig 2.2 — Diode in forward bias (current flows) and reverse bias (current blocked). Conventional current flows from Anode to Cathode.</div>
+  </div>
+
+  <h3>The Diode I-V Characteristic Curve</h3>
+  <p>The relationship between voltage and current in a diode is <em>non-linear</em>. This curve is one of the most important things to understand:</p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 500 320" width="500" height="320" xmlns="http://www.w3.org/2000/svg">
+      <!-- Axes -->
+      <line x1="60" y1="250" x2="460" y2="250" stroke="#8892a4" stroke-width="1.5"/>
+      <line x1="200" y1="30" x2="200" y2="290" stroke="#8892a4" stroke-width="1.5"/>
+      <!-- Axis labels -->
+      <text x="455" y="265" fill="#8892a4" font-size="11">V (Voltage)</text>
+      <text x="205" y="28" fill="#8892a4" font-size="11">I (Current)</text>
+      <text x="185" y="264" fill="#8892a4" font-size="10">0</text>
+      <!-- 0.7V mark -->
+      <line x1="280" y1="245" x2="280" y2="255" stroke="#81c784" stroke-width="1.5"/>
+      <text x="278" y="270" fill="#81c784" font-size="10">0.7V</text>
+      <text x="278" y="282" fill="#81c784" font-size="9">(Si)</text>
+      <!-- Forward bias curve (right side, exponential) -->
+      <path d="M200,250 Q240,248 280,246 Q300,244 310,230 Q325,200 340,140 Q355,80 370,40" fill="none" stroke="#81c784" stroke-width="2.5"/>
+      <!-- Reverse bias region (left side - small leakage) -->
+      <path d="M200,250 Q150,252 80,253 Q65,253.5 60,253.5" fill="none" stroke="#ff8a65" stroke-width="2"/>
+      <!-- Breakdown point -->
+      <path d="M60,253.5 L60,270 Q60,285 70,290" fill="none" stroke="#ff8a65" stroke-width="2.5" stroke-dasharray="4,2"/>
+      <text x="30" y="295" fill="#ff8a65" font-size="9">Breakdown</text>
+      <text x="18" y="305" fill="#ff8a65" font-size="9">Voltage (VBR)</text>
+      <!-- Labels -->
+      <text x="370" y="55" fill="#81c784" font-size="10">Forward</text>
+      <text x="370" y="67" fill="#81c784" font-size="10">Current</text>
+      <text x="70" y="240" fill="#ff8a65" font-size="10">Reverse</text>
+      <text x="70" y="252" fill="#ff8a65" font-size="10">Leakage</text>
+      <!-- Knee voltage annotation -->
+      <line x1="280" y1="246" x2="305" y2="210" stroke="#f7c948" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="307" y="208" fill="#f7c948" font-size="9">Knee / </text>
+      <text x="307" y="218" fill="#f7c948" font-size="9">Cut-in voltage</text>
+
+      <text x="250" y="310" text-anchor="middle" fill="#e8eaf0" font-size="12" font-weight="bold">Diode I-V Characteristic</text>
+    </svg>
+    <div class="caption">Fig 2.3 — Diode I-V curve. Exponential rise after 0.7V (Si). Tiny leakage in reverse. Breakdown at high reverse voltage.</div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Mnemonic — Diode Symbol</div>
+    <div class="text">"Point to Positive, Block at Negative" (P-N = Positive-Negative = Anode-Cathode)</div>
+    <div class="explain">The triangle in ▶| points in the direction conventional current flows (from P/Anode to N/Cathode). The bar is the wall that stops reverse current.</div>
+  </div>
+
+  <h3>Applications of Diodes</h3>
+
+  <h4>1. Half-Wave Rectifier</h4>
+  <p>Converts AC (alternating current, which goes + and −) into pulsating DC (only positive half passes through). A single diode blocks the negative half of AC.</p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 520 200" width="520" height="200" xmlns="http://www.w3.org/2000/svg">
+      <!-- AC Source -->
+      <circle cx="50" cy="100" r="28" fill="#1a1e2a" stroke="#4fc3f7" stroke-width="2"/>
+      <text x="50" y="97" text-anchor="middle" fill="#4fc3f7" font-size="11">AC</text>
+      <text x="50" y="110" text-anchor="middle" fill="#4fc3f7" font-size="11">~</text>
+      <!-- Top wire -->
+      <line x1="78" y1="82" x2="140" y2="82" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Diode -->
+      <polygon points="140,68 140,96 172,82" fill="#81c784" opacity="0.9"/>
+      <line x1="172" y1="68" x2="172" y2="96" stroke="#81c784" stroke-width="2.5"/>
+      <line x1="172" y1="82" x2="220" y2="82" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Resistor -->
+      <rect x="220" y="72" width="60" height="20" rx="4" fill="#1a1e2a" stroke="#ff8a65" stroke-width="2"/>
+      <text x="250" y="86" text-anchor="middle" fill="#ff8a65" font-size="10">RL</text>
+      <line x1="280" y1="82" x2="340" y2="82" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Bottom wire -->
+      <line x1="78" y1="118" x2="340" y2="118" stroke="#e8eaf0" stroke-width="2"/>
+      <line x1="340" y1="82" x2="340" y2="118" stroke="#e8eaf0" stroke-width="2"/>
+
+      <!-- Input AC waveform -->
+      <text x="50" y="155" text-anchor="middle" fill="#4fc3f7" font-size="9">Input (AC)</text>
+      <path d="M20,175 Q30,155 40,175 Q50,195 60,175 Q70,155 80,175" fill="none" stroke="#4fc3f7" stroke-width="1.5"/>
+
+      <!-- Arrow -->
+      <text x="100" y="175" fill="#8892a4" font-size="14">→</text>
+
+      <!-- Output waveform (half wave) -->
+      <text x="175" y="155" text-anchor="middle" fill="#81c784" font-size="9">Output (Half-Wave DC)</text>
+      <path d="M130,175 Q140,155 150,175 L160,175 Q170,175 180,175 Q190,175 200,175 Q210,155 220,175 L230,175" fill="none" stroke="#81c784" stroke-width="1.5"/>
+
+      <text x="260" y="170" text-anchor="middle" fill="#8892a4" font-size="9">Negative half</text>
+      <text x="260" y="182" text-anchor="middle" fill="#8892a4" font-size="9">is BLOCKED</text>
+
+      <text x="260" y="22" text-anchor="middle" fill="#e8eaf0" font-size="12" font-weight="bold">Half-Wave Rectifier</text>
+    </svg>
+    <div class="caption">Fig 2.4 — Half-wave rectifier. Only positive half-cycles pass. The diode blocks negative cycles.</div>
+  </div>
+
+  <h4>2. Full-Wave Bridge Rectifier</h4>
+  <p>Uses <strong>4 diodes</strong> arranged in a bridge. Both positive and negative halves of AC are converted to DC. More efficient than half-wave.</p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 500 280" width="500" height="280" xmlns="http://www.w3.org/2000/svg">
+      <!-- Bridge points -->
+      <!-- Top: T=140,60; Left: L=60,140; Right: R=340,140; Bottom: B=200,220 -->
+      <!-- 4 diodes -->
+      <!-- D1: L to T (left-top) -->
+      <line x1="60" y1="140" x2="140" y2="60" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <polygon points="80,120 90,110 95,125" fill="#81c784" opacity="0.9"/>
+      <text x="75" y="105" fill="#81c784" font-size="9">D1</text>
+      <!-- D2: B to T (bottom to top via right) -->
+      <line x1="200" y1="220" x2="340" y2="140" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <polygon points="280,175 290,165 295,180" fill="#81c784" opacity="0.9"/>
+      <text x="295" y="165" fill="#81c784" font-size="9">D2</text>
+      <!-- D3: T to R -->
+      <line x1="140" y1="60" x2="340" y2="140" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <polygon points="200,85 210,90 200,100" fill="#81c784" opacity="0.9"/>
+      <text x="210" y="80" fill="#81c784" font-size="9">D3</text>
+      <!-- D4: R to B -->
+      <line x1="340" y1="140" x2="200" y2="220" stroke="#e8eaf0" stroke-width="1.5" opacity="0.4"/>
+      <polygon points="285,195 275,200 270,187" fill="#81c784" opacity="0.9"/>
+      <text x="310" y="200" fill="#81c784" font-size="9">D4</text>
+      <!-- Junction dots -->
+      <circle cx="140" cy="60" r="5" fill="#f7c948"/>
+      <circle cx="340" cy="140" r="5" fill="#f7c948"/>
+      <circle cx="60" cy="140" r="5" fill="#ff8a65"/>
+      <circle cx="200" cy="220" r="5" fill="#ff8a65"/>
+      <!-- Labels -->
+      <text x="140" y="48" text-anchor="middle" fill="#f7c948" font-size="10">+Vout</text>
+      <text x="340" y="155" text-anchor="middle" fill="#f7c948" font-size="10">+</text>
+      <text x="200" y="240" text-anchor="middle" fill="#ff8a65" font-size="10">−Vout</text>
+      <!-- AC input on left and right -->
+      <text x="30" y="144" fill="#4fc3f7" font-size="10">AC~</text>
+      <!-- Resistor (load) -->
+      <rect x="370" y="125" width="50" height="30" rx="4" fill="#1a1e2a" stroke="#ff8a65" stroke-width="2"/>
+      <text x="395" y="144" text-anchor="middle" fill="#ff8a65" font-size="10">RL</text>
+      <line x1="340" y1="140" x2="370" y2="140" stroke="#e8eaf0" stroke-width="1.5"/>
+      <line x1="420" y1="140" x2="450" y2="140" stroke="#e8eaf0" stroke-width="1.5"/>
+      <line x1="450" y1="140" x2="450" y2="220" stroke="#e8eaf0" stroke-width="1.5"/>
+      <line x1="450" y1="220" x2="200" y2="220" stroke="#e8eaf0" stroke-width="1.5"/>
+
+      <!-- Output waveform -->
+      <path d="M50,265 Q60,250 70,265 Q80,250 90,265 Q100,250 110,265 Q120,250 130,265" fill="none" stroke="#81c784" stroke-width="1.5"/>
+      <text x="90" y="280" text-anchor="middle" fill="#81c784" font-size="9">Full-wave output (smoother DC)</text>
+
+      <text x="240" y="22" text-anchor="middle" fill="#e8eaf0" font-size="12" font-weight="bold">Full-Wave Bridge Rectifier (4 Diodes)</text>
+    </svg>
+    <div class="caption">Fig 2.5 — Bridge rectifier: 4 diodes redirect both halves of AC to produce full-wave DC output.</div>
+  </div>
+
+  <h4>3. Zener Diode (Voltage Regulator)</h4>
+  <div class="def">
+    <strong>Zener Diode</strong> — A special diode designed to operate in the <em>reverse breakdown</em> region without being destroyed. It maintains a <em>constant voltage</em> across it regardless of current changes. Used as a <strong>voltage regulator</strong>.
+  </div>
+
+  <div class="example-box">
+    <div class="label">🌍 Real-Life Example</div>
+    <p><strong>Zener in phone charger:</strong> The 5V USB output stays constant even if you connect different devices drawing different amounts of current. A Zener diode (or its IC equivalent) holds the voltage steady like a pressure relief valve on a water tank.</p>
+  </div>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Mnemonic — Diode Applications</div>
+    <div class="text">"RLZS — Rectify, Limit, Zener-regulate, Switch"</div>
+    <div class="explain">R=Rectifier (AC→DC), L=Limiter/clipper, Z=Zener voltage regulator, S=Switch (logic gates)</div>
+  </div>
+
+  <div class="qbox">
+    <div class="q">Q: A silicon diode has a forward voltage drop of 0.7V. If 5V is applied and a 100Ω resistor is in series, find the current.</div>
+    <div class="a"><strong>A:</strong> Voltage across resistor = 5V − 0.7V = 4.3V<br>
+    Current I = V/R = 4.3V / 100Ω = <strong>43 mA</strong><br>
+    <em>Note: The 0.7V is "consumed" by the diode's barrier voltage. The rest drives current through the resistor.</em></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- UNIT 3 : TRANSISTORS                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="unit3" class="section orange">
+  <div class="section-tag">Topic 3</div>
+  <h2>🔌 Transistors — BJT and JFET</h2>
+
+  <p>A <strong>transistor</strong> is a three-terminal semiconductor device. It can <strong>amplify</strong> (make small signals bigger) or <strong>switch</strong> (turn current on/off). It's the building block of every computer chip — billions of transistors in your phone's processor.</p>
+
+  <div class="example-box">
+    <div class="label">🌍 Real-Life Analogy</div>
+    <p><strong>Transistor as a water valve:</strong> A tiny signal on the control terminal is like turning a small valve handle — which controls a massive flow of water. Small input → control of large output.</p>
+  </div>
+
+  <h3>BJT — Bipolar Junction Transistor</h3>
+
+  <div class="def">
+    <strong>BJT</strong> — A transistor with <em>two P-N junctions</em>. It has three terminals: <strong>Base (B)</strong>, <strong>Collector (C)</strong>, and <strong>Emitter (E)</strong>. Called "bipolar" because it uses both electrons AND holes as charge carriers.
+  </div>
+
+  <p>BJTs come in two types: <strong>NPN</strong> and <strong>PNP</strong>.</p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 520 240" width="520" height="240" xmlns="http://www.w3.org/2000/svg">
+      <!-- NPN structure -->
+      <text x="130" y="20" text-anchor="middle" fill="#f7c948" font-size="13" font-weight="bold">NPN Transistor</text>
+      <!-- Three regions -->
+      <rect x="20" y="40" width="70" height="140" rx="4" fill="#4fc3f7" opacity="0.4" stroke="#4fc3f7" stroke-width="1.5"/>
+      <text x="55" y="115" text-anchor="middle" fill="#4fc3f7" font-size="11" font-weight="bold">N</text>
+      <text x="55" y="130" text-anchor="middle" fill="#4fc3f7" font-size="9">Emitter</text>
+      <text x="55" y="142" text-anchor="middle" fill="#4fc3f7" font-size="9">(heavily doped)</text>
+
+      <rect x="90" y="40" width="40" height="140" rx="0" fill="#ff8a65" opacity="0.4" stroke="#ff8a65" stroke-width="1.5"/>
+      <text x="110" y="115" text-anchor="middle" fill="#ff8a65" font-size="11" font-weight="bold">P</text>
+      <text x="110" y="130" text-anchor="middle" fill="#ff8a65" font-size="9">Base</text>
+      <text x="110" y="142" text-anchor="middle" fill="#ff8a65" font-size="9">(thin!)</text>
+
+      <rect x="130" y="40" width="70" height="140" rx="4" fill="#4fc3f7" opacity="0.4" stroke="#4fc3f7" stroke-width="1.5"/>
+      <text x="165" y="115" text-anchor="middle" fill="#4fc3f7" font-size="11" font-weight="bold">N</text>
+      <text x="165" y="130" text-anchor="middle" fill="#4fc3f7" font-size="9">Collector</text>
+      <text x="165" y="142" text-anchor="middle" fill="#4fc3f7" font-size="9">(lightly doped)</text>
+
+      <!-- Terminal lines -->
+      <line x1="20" y1="110" x2="5" y2="110" stroke="#4fc3f7" stroke-width="2"/>
+      <text x="0" y="108" fill="#4fc3f7" font-size="9" text-anchor="end">E</text>
+      <line x1="110" y1="40" x2="110" y2="25" stroke="#ff8a65" stroke-width="2"/>
+      <text x="110" y="18" fill="#ff8a65" font-size="9" text-anchor="middle">B</text>
+      <line x1="200" y1="110" x2="215" y2="110" stroke="#4fc3f7" stroke-width="2"/>
+      <text x="218" y="114" fill="#4fc3f7" font-size="9">C</text>
+
+      <!-- NPN circuit symbol -->
+      <text x="130" y="195" text-anchor="middle" fill="#e8eaf0" font-size="10">Circuit Symbol:</text>
+      <!-- Draw NPN symbol -->
+      <line x1="80" y1="210" x2="110" y2="210" stroke="#e8eaf0" stroke-width="2"/> <!-- base line -->
+      <line x1="110" y1="195" x2="110" y2="225" stroke="#e8eaf0" stroke-width="2"/> <!-- vertical bar -->
+      <line x1="110" y1="200" x2="135" y2="185" stroke="#e8eaf0" stroke-width="2"/> <!-- collector line -->
+      <line x1="110" y1="220" x2="135" y2="235" stroke="#e8eaf0" stroke-width="2"/> <!-- emitter line with arrow -->
+      <!-- Arrow on emitter (pointing out for NPN) -->
+      <polygon points="128,231 135,235 131,225" fill="#e8eaf0"/>
+      <text x="78" y="214" fill="#ff8a65" font-size="9">B</text>
+      <text x="138" y="185" fill="#4fc3f7" font-size="9">C</text>
+      <text x="138" y="240" fill="#4fc3f7" font-size="9">E</text>
+      <text x="110" y="260" text-anchor="middle" fill="#8892a4" font-size="9">Arrow points OUT (away from base) = NPN</text>
+
+      <!-- PNP -->
+      <text x="390" y="20" text-anchor="middle" fill="#ce93d8" font-size="13" font-weight="bold">PNP Transistor</text>
+      <rect x="280" y="40" width="70" height="140" rx="4" fill="#ff8a65" opacity="0.4" stroke="#ff8a65" stroke-width="1.5"/>
+      <text x="315" y="115" text-anchor="middle" fill="#ff8a65" font-size="11" font-weight="bold">P</text>
+      <text x="315" y="130" text-anchor="middle" fill="#ff8a65" font-size="9">Emitter</text>
+      <rect x="350" y="40" width="40" height="140" rx="0" fill="#4fc3f7" opacity="0.4" stroke="#4fc3f7" stroke-width="1.5"/>
+      <text x="370" y="115" text-anchor="middle" fill="#4fc3f7" font-size="11" font-weight="bold">N</text>
+      <text x="370" y="130" text-anchor="middle" fill="#4fc3f7" font-size="9">Base</text>
+      <rect x="390" y="40" width="70" height="140" rx="4" fill="#ff8a65" opacity="0.4" stroke="#ff8a65" stroke-width="1.5"/>
+      <text x="425" y="115" text-anchor="middle" fill="#ff8a65" font-size="11" font-weight="bold">P</text>
+      <text x="425" y="130" text-anchor="middle" fill="#ff8a65" font-size="9">Collector</text>
+      <line x1="280" y1="110" x2="265" y2="110" stroke="#ff8a65" stroke-width="2"/>
+      <text x="260" y="108" fill="#ff8a65" font-size="9" text-anchor="end">E</text>
+      <line x1="370" y1="40" x2="370" y2="25" stroke="#4fc3f7" stroke-width="2"/>
+      <text x="370" y="18" fill="#4fc3f7" font-size="9" text-anchor="middle">B</text>
+      <line x1="460" y1="110" x2="475" y2="110" stroke="#ff8a65" stroke-width="2"/>
+      <text x="478" y="114" fill="#ff8a65" font-size="9">C</text>
+
+      <!-- PNP symbol -->
+      <text x="390" y="195" text-anchor="middle" fill="#e8eaf0" font-size="10">Arrow points IN (NPN = Not Pointing iN, PNP = Points iN Proudly)</text>
+    </svg>
+    <div class="caption">Fig 3.1 — NPN and PNP BJT structure and circuit symbols. The emitter arrow direction tells you the type.</div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Mnemonic — NPN vs PNP Arrow</div>
+    <div class="text">NPN = "Not Pointing iN" | PNP = "Points iN Proudly"</div>
+    <div class="explain">In the circuit symbol, the emitter arrow for NPN points OUTWARD. For PNP it points INWARD (toward the base). Also remember: conventional current in NPN flows INTO the collector, OUT through emitter.</div>
+  </div>
+
+  <h3>BJT Working Principle (NPN in Active Region)</h3>
+  <p>In an NPN transistor, a small base current (I_B) controls a much larger collector current (I_C). The emitter current is the sum: I_E = I_B + I_C.</p>
+  <p>The transistor <strong>amplifies</strong> because of a parameter called <strong>β (beta)</strong> or h_FE — the current gain:</p>
+  <div class="formula">β = I_C / I_B &nbsp;&nbsp;(typically 50–300)</div>
+  <p>So if β = 100 and I_B = 20μA → I_C = 100 × 20μA = <strong>2mA</strong>. A tiny base current controls a 100× bigger collector current!</p>
+
+  <div class="example-box">
+    <div class="label">🌍 Real-Life Example</div>
+    <p><strong>Microphone amplifier:</strong> Your voice creates a tiny current in a microphone (I_B-scale). This feeds the base of a BJT. The transistor's collector current, powered by a battery, is 100–300× larger — enough to drive a speaker. That's amplification!</p>
+  </div>
+
+  <h3>BJT Configurations</h3>
+  <p>BJTs can be wired in 3 configurations depending on which terminal is common (shared between input and output):</p>
+
+  <table>
+    <tr><th>Configuration</th><th>Common Terminal</th><th>Current Gain</th><th>Voltage Gain</th><th>Use</th></tr>
+    <tr><td>Common Emitter (CE)</td><td>Emitter</td><td>High (β)</td><td>High</td><td>Most popular amplifier</td></tr>
+    <tr><td>Common Base (CB)</td><td>Base</td><td>&lt;1</td><td>High</td><td>High-frequency circuits</td></tr>
+    <tr><td>Common Collector (CC)</td><td>Collector</td><td>High</td><td>~1</td><td>Buffer / impedance matching</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Mnemonic</div>
+    <div class="text">"CE = Current Excellent (both gains high). CB = Current Below 1 but Voltage high. CC = Current Collector, voltage stays same."</div>
+  </div>
+
+  <h3>BJT CE Amplifier Circuit — Complete Analysis</h3>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 540 300" width="540" height="300" xmlns="http://www.w3.org/2000/svg">
+      <!-- VCC rail -->
+      <line x1="280" y1="20" x2="280" y2="50" stroke="#f7c948" stroke-width="2"/>
+      <text x="280" y="15" text-anchor="middle" fill="#f7c948" font-size="11">VCC (+12V)</text>
+      <!-- RC (collector resistor) -->
+      <rect x="260" y="50" width="40" height="24" rx="4" fill="#1a1e2a" stroke="#ff8a65" stroke-width="2"/>
+      <text x="280" y="66" text-anchor="middle" fill="#ff8a65" font-size="10">RC</text>
+      <!-- Collector line down to transistor -->
+      <line x1="280" y1="74" x2="280" y2="120" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Transistor symbol -->
+      <!-- Base line -->
+      <line x1="190" y1="150" x2="230" y2="150" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Vertical bar (base) -->
+      <line x1="230" y1="125" x2="230" y2="175" stroke="#e8eaf0" stroke-width="2.5"/>
+      <!-- Collector line (up-right) -->
+      <line x1="230" y1="130" x2="280" y2="120" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Emitter line (down-right) with arrow -->
+      <line x1="230" y1="170" x2="280" y2="185" stroke="#e8eaf0" stroke-width="2"/>
+      <polygon points="268,182 280,185 271,174" fill="#e8eaf0"/>
+      <!-- BJT labels -->
+      <text x="225" y="118" fill="#ff8a65" font-size="9">C</text>
+      <text x="180" y="154" fill="#ff8a65" font-size="9">B</text>
+      <text x="225" y="184" fill="#ff8a65" font-size="9">E</text>
+      <!-- Emitter to ground via RE -->
+      <line x1="280" y1="185" x2="280" y2="210" stroke="#e8eaf0" stroke-width="2"/>
+      <rect x="260" y="210" width="40" height="24" rx="4" fill="#1a1e2a" stroke="#ff8a65" stroke-width="2"/>
+      <text x="280" y="226" text-anchor="middle" fill="#ff8a65" font-size="10">RE</text>
+      <line x1="280" y1="234" x2="280" y2="255" stroke="#e8eaf0" stroke-width="2"/>
+      <!-- Ground -->
+      <line x1="255" y1="255" x2="305" y2="255" stroke="#e8eaf0" stroke-width="2"/>
+      <line x1="262" y1="261" x2="298" y2="261" stroke="#e8eaf0" stroke-width="1.5"/>
+      <line x1="269" y1="267" x2="291" y2="267" stroke="#e8eaf0" stroke-width="1"/>
+      <!-- R1 bias resistor -->
+      <line x1="190" y1="150" x2="190" y2="80" stroke="#e8eaf0" stroke-width="1.5"/>
+      <rect x="170" y="50" width="40" height="30" rx="4" fill="#1a1e2a" stroke="#ce93d8" stroke-width="1.5"/>
+      <text x="190" y="69" text-anchor="middle" fill="#ce93d8" font-size="10">R1</text>
+      <line x1="190" y1="50" x2="190" y2="20" stroke="#e8eaf0" stroke-width="1.5"/>
+      <line x1="190" y1="20" x2="280" y2="20" stroke="#f7c948" stroke-width="1.5"/>
+      <!-- R2 bias resistor -->
+      <line x1="190" y1="150" x2="190" y2="200" stroke="#e8eaf0" stroke-width="1.5"/>
+      <rect x="170" y="200" width="40" height="30" rx="4" fill="#1a1e2a" stroke="#ce93d8" stroke-width="1.5"/>
+      <text x="190" y="219" text-anchor="middle" fill="#ce93d8" font-size="10">R2</text>
+      <line x1="190" y1="230" x2="190" y2="255" stroke="#e8eaf0" stroke-width="1.5"/>
+      <line x1="190" y1="255" x2="280" y2="255" stroke="#e8eaf0" stroke-width="1.5"/>
+      <!-- Input signal and coupling cap -->
+      <circle cx="60" cy="150" r="22" fill="#1a1e2a" stroke="#4fc3f7" stroke-width="1.5"/>
+      <text x="60" y="147" text-anchor="middle" fill="#4fc3f7" font-size="9">Vin</text>
+      <text x="60" y="158" text-anchor="middle" fill="#4fc3f7" font-size="9">AC~</text>
+      <line x1="82" y1="150" x2="120" y2="150" stroke="#4fc3f7" stroke-width="1.5"/>
+      <!-- Coupling cap C1 -->
+      <line x1="120" y1="138" x2="120" y2="162" stroke="#4fc3f7" stroke-width="2"/>
+      <line x1="128" y1="138" x2="128" y2="162" stroke="#4fc3f7" stroke-width="2"/>
+      <line x1="128" y1="150" x2="190" y2="150" stroke="#4fc3f7" stroke-width="1.5"/>
+      <text x="124" y="130" text-anchor="middle" fill="#4fc3f7" font-size="9">C1</text>
+      <!-- Output -->
+      <line x1="280" y1="100" x2="370" y2="100" stroke="#81c784" stroke-width="1.5"/>
+      <!-- Coupling cap C2 -->
+      <line x1="370" y1="88" x2="370" y2="112" stroke="#81c784" stroke-width="2"/>
+      <line x1="378" y1="88" x2="378" y2="112" stroke="#81c784" stroke-width="2"/>
+      <line x1="378" y1="100" x2="430" y2="100" stroke="#81c784" stroke-width="1.5"/>
+      <text x="374" y="80" text-anchor="middle" fill="#81c784" font-size="9">C2</text>
+      <!-- Load RL -->
+      <rect x="430" y="85" width="50" height="30" rx="4" fill="#1a1e2a" stroke="#81c784" stroke-width="1.5"/>
+      <text x="455" y="103" text-anchor="middle" fill="#81c784" font-size="10">RL</text>
+      <line x1="480" y1="100" x2="510" y2="100" stroke="#81c784" stroke-width="1.5"/>
+      <text x="510" y="97" fill="#81c784" font-size="10">Vout</text>
+      <!-- Ground for RL -->
+      <line x1="455" y1="115" x2="455" y2="255" stroke="#e8eaf0" stroke-width="1" stroke-dasharray="3,2"/>
+
+      <text x="270" y="285" text-anchor="middle" fill="#e8eaf0" font-size="12" font-weight="bold">CE Amplifier with Voltage Divider Bias</text>
+      <text x="270" y="298" text-anchor="middle" fill="#8892a4" font-size="9">R1,R2 = bias; RC,RE = stability; C1,C2 = coupling caps (block DC, pass AC)</text>
+    </svg>
+    <div class="caption">Fig 3.2 — Common Emitter amplifier. R1 and R2 form a voltage divider to set the Q-point. AC signal enters via C1, amplified output exits via C2.</div>
+  </div>
+
+  <!-- ══════════ JFET ══════════ -->
+  <h3>JFET — Junction Field Effect Transistor</h3>
+
+  <div class="def">
+    <strong>JFET</strong> — A voltage-controlled device (unlike BJT which is current-controlled). A voltage at the <strong>Gate (G)</strong> controls the current flowing from <strong>Drain (D)</strong> to <strong>Source (S)</strong> through a <em>channel</em>. Only majority carriers flow (unipolar), so it's faster and has higher input impedance than BJT.
+  </div>
+
+  <p>JFETs have two types: <strong>N-channel</strong> and <strong>P-channel</strong>.</p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 520 280" width="520" height="280" xmlns="http://www.w3.org/2000/svg">
+      <!-- N-channel JFET structure -->
+      <text x="130" y="18" text-anchor="middle" fill="#f7c948" font-size="12" font-weight="bold">N-channel JFET — Structure</text>
+      <!-- N channel bar -->
+      <rect x="80" y="40" width="100" height="180" rx="6" fill="#4fc3f7" opacity="0.35" stroke="#4fc3f7" stroke-width="2"/>
+      <text x="130" y="132" text-anchor="middle" fill="#4fc3f7" font-size="11" font-weight="bold">N-channel</text>
+      <!-- P-gates on sides -->
+      <rect x="40" y="80" width="40" height="100" rx="4" fill="#ff8a65" opacity="0.5" stroke="#ff8a65" stroke-width="1.5"/>
+      <text x="60" y="130" text-anchor="middle" fill="#ff8a65" font-size="9">P</text>
+      <text x="60" y="143" text-anchor="middle" fill="#ff8a65" font-size="9">Gate</text>
+      <rect x="180" y="80" width="40" height="100" rx="4" fill="#ff8a65" opacity="0.5" stroke="#ff8a65" stroke-width="1.5"/>
+      <text x="200" y="130" text-anchor="middle" fill="#ff8a65" font-size="9">P</text>
+      <text x="200" y="143" text-anchor="middle" fill="#ff8a65" font-size="9">Gate</text>
+      <!-- Gate wire -->
+      <line x1="40" y1="130" x2="20" y2="130" stroke="#ff8a65" stroke-width="2"/>
+      <text x="12" y="134" fill="#ff8a65" font-size="9">G</text>
+      <!-- Depletion region inside channel -->
+      <rect x="80" y="80" width="25" height="100" rx="0" fill="#ce93d8" opacity="0.35"/>
+      <rect x="155" y="80" width="25" height="100" rx="0" fill="#ce93d8" opacity="0.35"/>
+      <text x="130" y="165" text-anchor="middle" fill="#ce93d8" font-size="8">Depletion</text>
+      <!-- Drain top -->
+      <line x1="130" y1="40" x2="130" y2="20" stroke="#e8eaf0" stroke-width="2"/>
+      <text x="130" y="14" text-anchor="middle" fill="#e8eaf0" font-size="9">D (Drain)</text>
+      <!-- Source bottom -->
+      <line x1="130" y1="220" x2="130" y2="240" stroke="#e8eaf0" stroke-width="2"/>
+      <text x="130" y="252" text-anchor="middle" fill="#e8eaf0" font-size="9">S (Source)</text>
+      <!-- Channel current arrow -->
+      <defs>
+        <marker id="arr_white" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L7,3 z" fill="#e8eaf0"/>
+        </marker>
+      </defs>
+      <line x1="135" y1="195" x2="135" y2="65" stroke="#81c784" stroke-width="1.5" marker-end="url(#arr_white)" stroke-dasharray="4,2"/>
+      <text x="148" y="135" fill="#81c784" font-size="9">ID→</text>
+
+      <!-- JFET symbol N-channel -->
+      <text x="350" y="18" text-anchor="middle" fill="#4fc3f7" font-size="12" font-weight="bold">N-channel Symbol</text>
+      <!-- Vertical channel line -->
+      <line x1="350" y1="50" x2="350" y2="200" stroke="#4fc3f7" stroke-width="3"/>
+      <!-- Gate line -->
+      <line x1="300" y1="130" x2="340" y2="130" stroke="#ff8a65" stroke-width="2"/>
+      <!-- Small line at junction -->
+      <line x1="340" y1="115" x2="340" y2="145" stroke="#ff8a65" stroke-width="2"/>
+      <!-- Arrow on gate (pointing inward for N-channel) -->
+      <polygon points="340,130 330,125 330,135" fill="#ff8a65"/>
+      <!-- Drain -->
+      <line x1="350" y1="50" x2="390" y2="50" stroke="#e8eaf0" stroke-width="2"/>
+      <text x="395" y="54" fill="#e8eaf0" font-size="10">D</text>
+      <!-- Source -->
+      <line x1="350" y1="200" x2="390" y2="200" stroke="#e8eaf0" stroke-width="2"/>
+      <text x="395" y="204" fill="#e8eaf0" font-size="10">S</text>
+      <!-- Gate label -->
+      <text x="290" y="134" fill="#ff8a65" font-size="10">G</text>
+
+      <text x="350" y="245" text-anchor="middle" fill="#8892a4" font-size="9">Gate arrow points INTO channel for N-channel JFET</text>
+      <text x="350" y="260" text-anchor="middle" fill="#8892a4" font-size="9">VGS (gate-source voltage) PINCHES the channel</text>
+    </svg>
+    <div class="caption">Fig 3.3 — N-channel JFET structure and symbol. Negative VGS widens depletion region, narrowing the channel and reducing drain current.</div>
+  </div>
+
+  <h3>JFET Working — The Pinch-Off Effect</h3>
+  <p>In an N-channel JFET:</p>
+  <ul>
+    <li>With <strong>VGS = 0</strong>: Channel is fully open. Maximum current (I_DSS) flows.</li>
+    <li>Apply <strong>negative VGS</strong>: Depletion regions from P-gates grow, narrowing the channel. Current decreases.</li>
+    <li>At <strong>VGS = VP (pinch-off voltage)</strong>: Depletion regions meet, channel is fully pinched off. I_D ≈ 0.</li>
+  </ul>
+  <div class="formula">I_D = I_DSS × (1 − VGS/VP)²  &nbsp;[Shockley's equation]</div>
+
+  <div class="example-box">
+    <div class="label">🌍 Real-Life Analogy</div>
+    <p><strong>Garden hose with clamp:</strong> The N-channel is a hose. The Gate voltage is a clamp squeezing the hose. No clamp = full flow. Squeeze more = less flow. Full squeeze = no flow (pinched off). Unlike BJT, JFET gate draws nearly zero current (it's reverse biased), so it doesn't load the driving circuit.</p>
+  </div>
+
+  <h3>BJT vs JFET Comparison</h3>
+  <table>
+    <tr><th>Feature</th><th>BJT</th><th>JFET</th></tr>
+    <tr><td>Control type</td><td>Current-controlled (IB)</td><td>Voltage-controlled (VGS)</td></tr>
+    <tr><td>Carriers</td><td>Both (bipolar)</td><td>One type (unipolar)</td></tr>
+    <tr><td>Input impedance</td><td>Low (kΩ)</td><td>Very high (MΩ)</td></tr>
+    <tr><td>Noise</td><td>Higher</td><td>Lower (good for audio)</td></tr>
+    <tr><td>Terminals</td><td>Base, Collector, Emitter</td><td>Gate, Drain, Source</td></tr>
+    <tr><td>Gain parameter</td><td>β (current gain)</td><td>gm (transconductance)</td></tr>
+    <tr><td>Application</td><td>General amplifiers, switches</td><td>RF amps, op-amps, mixers</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Mnemonic — BJT terminals vs JFET</div>
+    <div class="text">BJT = "BCE" → "Big Current Everywhere" | JFET = "GDS" → "Gate Drains the Source"</div>
+  </div>
+
+  <div class="qbox">
+    <div class="q">Q: A BJT has β = 150 and I_B = 40 μA. Find I_C and I_E.</div>
+    <div class="a"><strong>A:</strong><br>
+    I_C = β × I_B = 150 × 40μA = <strong>6 mA</strong><br>
+    I_E = I_C + I_B = 6mA + 0.04mA = <strong>6.04 mA</strong><br>
+    <em>Note: I_E ≈ I_C since I_B is tiny. The transistor amplified a 40μA signal to 6mA — 150× amplification!</em></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- UNIT 4 : AC AND DC ANALYSIS OF AMPLIFIER              -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="unit4" class="section purple">
+  <div class="section-tag">Topic 4 — Part A</div>
+  <h2>📈 DC Analysis of Amplifier</h2>
+
+  <p>When we analyze a transistor amplifier, we split the analysis into two parts: <strong>DC analysis</strong> (what are the steady-state voltages and currents with no signal?) and <strong>AC analysis</strong> (how does it handle the actual signal?). This is called <strong>superposition</strong>.</p>
+
+  <div class="def">
+    <strong>DC Analysis</strong> — Kill all AC sources (replace AC with open or short circuit depending on type). Find the steady DC currents and voltages — specifically the Q-point (quiescent operating point). Capacitors are open circuits for DC.
+  </div>
+
+  <h3>Voltage Divider Bias — DC Analysis Steps</h3>
+  <p>For the CE amplifier (Fig 3.2), with voltage divider bias (R1, R2):</p>
+
+  <div class="card purple">
+    <h4>Step 1: Find V_B (Base Voltage)</h4>
+    <div class="formula">V_B = VCC × R2 / (R1 + R2)</div>
+    <p>This is a simple voltage divider. R1 and R2 divide VCC to set the base voltage.</p>
+    <p><strong>Example:</strong> VCC=12V, R1=10kΩ, R2=2.2kΩ → V_B = 12 × 2.2/(10+2.2) = <strong>2.16V</strong></p>
+  </div>
+
+  <div class="card purple">
+    <h4>Step 2: Find V_E (Emitter Voltage)</h4>
+    <div class="formula">V_E = V_B − V_BE &nbsp;&nbsp;(V_BE = 0.7V for silicon)</div>
+    <p>V_E = 2.16 − 0.7 = <strong>1.46V</strong></p>
+  </div>
+
+  <div class="card purple">
+    <h4>Step 3: Find I_E (Emitter Current)</h4>
+    <div class="formula">I_E = V_E / RE</div>
+    <p>If RE = 1kΩ → I_E = 1.46V / 1kΩ = <strong>1.46 mA</strong></p>
+  </div>
+
+  <div class="card purple">
+    <h4>Step 4: Find I_C and V_CE</h4>
+    <div class="formula">I_C ≈ I_E = 1.46 mA (since β >> 1)</div>
+    <div class="formula">V_CE = VCC − I_C(RC + RE)</div>
+    <p>If RC = 4.7kΩ → V_CE = 12 − 1.46mA × (4.7k + 1k) = 12 − 8.32 = <strong>3.68V</strong></p>
+    <p>The Q-point is at (V_CE = 3.68V, I_C = 1.46mA)</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- UNIT 5 : Q-POINT AND LOAD LINE                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="unit5" class="section">
+  <div class="section-tag">Topic 4 — Part B (Critical)</div>
+  <h2>📐 Q-Point, Load Line &amp; AC Analysis</h2>
+
+  <h3>What is the Q-Point?</h3>
+  <div class="def">
+    <strong>Q-Point (Quiescent Operating Point)</strong> — The DC operating point of the transistor <em>without any AC signal</em>. It's the "resting position" of the transistor, defined by steady-state values of V_CE and I_C. The Q represents "quiescent" = quiet/still.
+  </div>
+
+  <div class="example-box">
+    <div class="label">🌍 Real-Life Analogy</div>
+    <p><strong>Q-point = A swing at rest.</strong> When a child sits still on a swing (no pushing), that's the Q-point. When you push it (AC signal), it swings symmetrically around that rest position. If the rest position is too low (swing dragging on ground) or too high (swing hits the top bar), the swing can't move freely — just like a badly biased transistor clips the signal.</p>
+  </div>
+
+  <h3>The DC Load Line</h3>
+  <p>The load line is a straight line drawn on the transistor's I_C vs V_CE characteristics. It represents all possible operating points given VCC and the circuit resistances. The equation comes from Kirchhoff's Voltage Law:</p>
+
+  <div class="formula">VCC = I_C × (RC + RE) + V_CE &nbsp;→&nbsp; I_C = (VCC − V_CE) / (RC + RE)</div>
+
+  <p>This is a linear equation (y = mx + c). Two easy points to plot it:</p>
+  <ul>
+    <li><strong>When I_C = 0:</strong> V_CE = VCC (x-intercept) — transistor is cut off</li>
+    <li><strong>When V_CE = 0:</strong> I_C = VCC / (RC + RE) (y-intercept) — transistor saturated</li>
+  </ul>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 520 340" width="520" height="340" xmlns="http://www.w3.org/2000/svg">
+      <!-- Axes -->
+      <line x1="60" y1="280" x2="480" y2="280" stroke="#8892a4" stroke-width="2"/>
+      <line x1="60" y1="280" x2="60" y2="30" stroke="#8892a4" stroke-width="2"/>
+      <!-- Axis labels -->
+      <text x="480" y="295" fill="#8892a4" font-size="11">V_CE (V)</text>
+      <text x="10" y="40" fill="#8892a4" font-size="11">I_C</text>
+      <text x="10" y="52" fill="#8892a4" font-size="11">(mA)</text>
+
+      <!-- Multiple I_B curves (BJT output characteristics) -->
+      <!-- I_B = 80μA -->
+      <path d="M60,80 Q120,78 200,77 Q300,77 460,76" fill="none" stroke="#ce93d8" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="462" y="80" fill="#ce93d8" font-size="9">IB=80μA</text>
+      <!-- I_B = 60μA -->
+      <path d="M60,110 Q120,108 200,107 Q300,107 460,106" fill="none" stroke="#ce93d8" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="462" y="110" fill="#ce93d8" font-size="9">IB=60μA</text>
+      <!-- I_B = 40μA -->
+      <path d="M60,145 Q120,143 200,142 Q300,142 460,141" fill="none" stroke="#ce93d8" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="462" y="145" fill="#ce93d8" font-size="9">IB=40μA</text>
+      <!-- I_B = 20μA -->
+      <path d="M60,180 Q120,178 200,177 Q300,177 460,176" fill="none" stroke="#ce93d8" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="462" y="180" fill="#ce93d8" font-size="9">IB=20μA</text>
+      <!-- I_B = 0 -->
+      <path d="M60,260 Q200,260 460,260" fill="none" stroke="#ce93d8" stroke-width="1" stroke-dasharray="2,3"/>
+      <text x="462" y="263" fill="#ce93d8" font-size="9">IB=0</text>
+
+      <!-- DC Load Line (from saturation to cutoff) -->
+      <!-- Saturation point (V_CE=0): I_C = VCC/(RC+RE) ≈ let's say 2.1mA → y=100px from bottom... scale: 280px=0mA, 60px=2.5mA, so 2.1mA = 280-(2.1/2.5)*220 = 280-185=95... use 95 -->
+      <!-- Cutoff (I_C=0): V_CE=VCC=12V → x = 60 + (12/14)*400 = 60+342=400 -->
+      <line x1="80" y1="95" x2="420" y2="280" stroke="#f7c948" stroke-width="2.5"/>
+      <text x="420" y="268" fill="#f7c948" font-size="10" text-anchor="end">Cutoff (IC=0, VCE=VCC)</text>
+      <text x="82" y="88" fill="#f7c948" font-size="10">Saturation (VCE=0)</text>
+      <!-- Q-point on load line -->
+      <!-- Midpoint ≈ (210, 185) -->
+      <circle cx="248" cy="187" r="7" fill="#f7c948" stroke="#0d0f14" stroke-width="2"/>
+      <text x="258" y="184" fill="#f7c948" font-size="11" font-weight="bold">Q</text>
+
+      <!-- Dotted lines from Q to axes -->
+      <line x1="248" y1="187" x2="248" y2="280" stroke="#f7c948" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="248" y1="187" x2="60" y2="187" stroke="#f7c948" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="248" y="294" text-anchor="middle" fill="#f7c948" font-size="10">V_CEQ</text>
+      <text x="48" y="191" text-anchor="end" fill="#f7c948" font-size="10">I_CQ</text>
+
+      <!-- AC signal swing on load line -->
+      <!-- Signal moves Q-point up and down the load line -->
+      <circle cx="180" cy="230" r="4" fill="#81c784" stroke="#0d0f14" stroke-width="1"/>
+      <circle cx="318" cy="147" r="4" fill="#81c784" stroke="#0d0f14" stroke-width="1"/>
+      <line x1="180" y1="230" x2="318" y2="147" stroke="#81c784" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="160" y="244" fill="#81c784" font-size="9">AC swing ↕</text>
+      <!-- Arrow label -->
+      <text x="330" y="143" fill="#81c784" font-size="9">Signal swing</text>
+
+      <!-- Region labels -->
+      <text x="90" y="275" fill="#ff8a65" font-size="10">Saturation</text>
+      <text x="390" y="275" fill="#ff8a65" font-size="10">Cutoff</text>
+
+      <text x="260" y="325" text-anchor="middle" fill="#e8eaf0" font-size="13" font-weight="bold">DC Load Line &amp; Q-Point</text>
+    </svg>
+    <div class="caption">Fig 5.1 — Load line drawn from saturation (y-axis) to cutoff (x-axis). Q-point is where the load line crosses the correct I_B curve. AC signal makes the operating point swing along the load line.</div>
+  </div>
+
+  <h3>Role of Q-Point — Why Placement Matters</h3>
+
+  <div class="card gold">
+    <h4>Ideal Q-point: Midpoint of Load Line</h4>
+    <p>Placing Q at the <strong>center</strong> of the load line allows maximum undistorted AC signal swing — equal room above and below. This gives maximum output voltage swing (V_pp).</p>
+  </div>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 520 200" width="520" height="200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Three cases side by side -->
+      <!-- Case 1: Q too low (near cutoff) -->
+      <text x="85" y="18" text-anchor="middle" fill="#ff8a65" font-size="11" font-weight="bold">Q near Cutoff</text>
+      <line x1="20" y1="160" x2="160" y2="40" stroke="#f7c948" stroke-width="2"/>
+      <circle cx="130" cy="65" r="6" fill="#ff8a65"/>
+      <!-- Clipped AC signal -->
+      <text x="85" y="180" text-anchor="middle" fill="#ff8a65" font-size="9">Bottom of AC clipped!</text>
+
+      <!-- Case 2: Ideal Q -->
+      <text x="260" y="18" text-anchor="middle" fill="#81c784" font-size="11" font-weight="bold">Q at Midpoint ✓</text>
+      <line x1="185" y1="160" x2="335" y2="40" stroke="#f7c948" stroke-width="2"/>
+      <circle cx="260" cy="100" r="6" fill="#81c784"/>
+      <text x="260" y="180" text-anchor="middle" fill="#81c784" font-size="9">Full swing — max output</text>
+
+      <!-- Case 3: Q too high (near saturation) -->
+      <text x="435" y="18" text-anchor="middle" fill="#ff8a65" font-size="11" font-weight="bold">Q near Saturation</text>
+      <line x1="360" y1="160" x2="500" y2="40" stroke="#f7c948" stroke-width="2"/>
+      <circle cx="385" cy="143" r="6" fill="#ff8a65"/>
+      <text x="435" y="180" text-anchor="middle" fill="#ff8a65" font-size="9">Top of AC clipped!</text>
+
+      <!-- Dividers -->
+      <line x1="172" y1="10" x2="172" y2="170" stroke="#252a38" stroke-width="1"/>
+      <line x1="348" y1="10" x2="348" y2="170" stroke="#252a38" stroke-width="1"/>
+    </svg>
+    <div class="caption">Fig 5.2 — Q-point placement effect. Too close to cutoff clips negative half; too close to saturation clips positive half. Midpoint = maximum undistorted swing.</div>
+  </div>
+
+  <h3>AC Analysis — The Small-Signal Model</h3>
+  <div class="def">
+    <strong>AC Analysis</strong> — Kill all DC sources (VCC → short circuit). Capacitors become short circuits (they pass AC freely). Find the amplifier's gain, input/output impedance for the signal.
+  </div>
+
+  <p>Key parameter for AC analysis: <strong>r_e</strong> (dynamic emitter resistance)</p>
+  <div class="formula">r_e = 26mV / I_E &nbsp;&nbsp;(at room temperature)</div>
+  <p>This is the intrinsic resistance that the AC signal "sees" at the emitter.</p>
+
+  <h3>AC Voltage Gain of CE Amplifier</h3>
+  <div class="formula">A_v = −RC / r_e &nbsp;&nbsp;(negative = 180° phase inversion)</div>
+  <p><strong>Example:</strong> If I_E = 1.46mA → r_e = 26mV/1.46mA = 17.8Ω. With RC = 4.7kΩ: A_v = −4700/17.8 = <strong>−264</strong></p>
+  <p>The minus sign means the output is <em>180° out of phase</em> with the input (when input goes up, output goes down). This is a key feature of the CE amplifier.</p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 500 200" width="500" height="200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Input sine wave -->
+      <text x="80" y="18" text-anchor="middle" fill="#4fc3f7" font-size="11">Input Signal (small)</text>
+      <line x1="20" y1="100" x2="155" y2="100" stroke="#8892a4" stroke-width="1"/>
+      <path d="M20,100 Q35,70 50,100 Q65,130 80,100 Q95,70 110,100 Q125,130 140,100 Q155,130 170,100" fill="none" stroke="#4fc3f7" stroke-width="2"/>
+      <!-- Arrow -->
+      <text x="200" y="105" text-anchor="middle" fill="#f7c948" font-size="20">→</text>
+      <text x="200" y="125" text-anchor="middle" fill="#f7c948" font-size="9">CE Amp</text>
+      <text x="200" y="138" text-anchor="middle" fill="#f7c948" font-size="9">Av=−264</text>
+      <!-- Output wave: inverted and amplified -->
+      <text x="390" y="18" text-anchor="middle" fill="#81c784" font-size="11">Output (amplified, inverted)</text>
+      <line x1="240" y1="100" x2="480" y2="100" stroke="#8892a4" stroke-width="1"/>
+      <path d="M240,100 Q260,160 280,100 Q300,40 320,100 Q340,160 360,100 Q380,40 400,100 Q420,160 440,100 Q460,40 480,100" fill="none" stroke="#81c784" stroke-width="2"/>
+      <!-- Annotations -->
+      <text x="360" y="190" text-anchor="middle" fill="#8892a4" font-size="9">Larger amplitude + flipped (180° phase shift) = CE amplifier output</text>
+    </svg>
+    <div class="caption">Fig 5.3 — CE amplifier output is amplified AND inverted (180° phase shift). Input goes up → output goes down.</div>
+  </div>
+
+  <h3>AC Load Line vs DC Load Line</h3>
+  <div class="def">
+    <strong>AC Load Line</strong> — In AC analysis, capacitors become shorts, so the AC "sees" RC in parallel with RL (load). The AC load line is steeper than the DC load line and passes through the same Q-point.
+  </div>
+  <div class="formula">AC load = RC_ac = RC ∥ RL = (RC × RL) / (RC + RL)</div>
+  <p>The AC load line passes through the Q-point at a steeper slope (−1/RC_ac) compared to the DC load line slope (−1/(RC+RE)).</p>
+
+  <div class="qbox">
+    <div class="q">Q: Why must we remove RE from AC gain calculation but keep it in DC analysis?</div>
+    <div class="a"><strong>A:</strong> In the circuit, a bypass capacitor (CE) is placed in parallel with RE. For DC, CE is open (capacitor blocks DC) so RE appears in the circuit and provides emitter degeneration for stability. For AC, CE is short circuit (capacitor passes AC), so RE is effectively bypassed and doesn't appear in AC gain. This is why r_e (not r_e + RE) appears in the AC gain formula. Without CE, gain = −RC/(r_e + RE) — much lower.</div>
+  </div>
+
+  <div class="qbox">
+    <div class="q">Q: What happens to the Q-point if temperature increases?</div>
+    <div class="a"><strong>A:</strong> At higher temperature, V_BE decreases (~2mV/°C) and β increases. Both effects cause I_C to increase — Q-point shifts upward on the load line toward saturation. This can cause <em>thermal runaway</em> — more heat → more I_C → more heat. Emitter resistor RE stabilizes the Q-point by negative feedback: if I_C rises → I_E rises → V_E rises → V_BE = V_B − V_E decreases → I_B decreases → I_C decreases back.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- QUICK REVISION                                          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-divider">— — — Quick Revision Summary — — —</div>
+
+<div class="section blue">
+  <div class="section-tag">Revision</div>
+  <h2>🔑 All Mnemonics &amp; Key Formulas</h2>
+
+  <div class="mnemonic">
+    <div class="label">Conventional Current</div>
+    <div class="text">"Conventional = Civilised (positive goes first)" — flows from + to −</div>
+  </div>
+  <div class="mnemonic">
+    <div class="label">Semiconductor Materials</div>
+    <div class="text">"CSI: Conductor, Semiconductor, Insulator" — more valence electrons → harder to conduct</div>
+  </div>
+  <div class="mnemonic">
+    <div class="label">N-type vs P-type</div>
+    <div class="text">N = Negative carriers (extra electron) — Phosphorus (5 valence)<br>P = Positive holes — Boron (3 valence)</div>
+  </div>
+  <div class="mnemonic">
+    <div class="label">Diode</div>
+    <div class="text">"Point to Positive" — triangle points in direction of conventional current (A→K)</div>
+  </div>
+  <div class="mnemonic">
+    <div class="label">NPN vs PNP arrow</div>
+    <div class="text">NPN = "Not Pointing iN" | PNP = "Points iN Proudly"</div>
+  </div>
+  <div class="mnemonic">
+    <div class="label">BJT Terminals</div>
+    <div class="text">"BCE = Big Current Everywhere" (Base, Collector, Emitter)</div>
+  </div>
+  <div class="mnemonic">
+    <div class="label">JFET Terminals</div>
+    <div class="text">"GDS = Gate Drains the Source" (Gate, Drain, Source)</div>
+  </div>
+  <div class="mnemonic">
+    <div class="label">Q-point</div>
+    <div class="text">"Q = Quiet (no signal)" — midpoint gives max undistorted swing</div>
+  </div>
+  <div class="mnemonic">
+    <div class="label">CE Amplifier gain</div>
+    <div class="text">"Negative RC over re = RC Reversed, inverted and amplified"</div>
+  </div>
+
+  <h3>All Key Formulas</h3>
+  <div class="formula">I = Q/t &nbsp;| &nbsp;V = IR &nbsp;| &nbsp;P = IV</div>
+  <div class="formula">I_C = β × I_B &nbsp;| &nbsp;I_E = I_C + I_B &nbsp;| &nbsp;α = I_C/I_E = β/(β+1)</div>
+  <div class="formula">V_B = VCC × R2/(R1+R2) &nbsp;| &nbsp;V_E = V_B − 0.7V &nbsp;| &nbsp;I_E = V_E/RE</div>
+  <div class="formula">V_CE = VCC − I_C(RC+RE) &nbsp;&nbsp;[DC load line equation]</div>
+  <div class="formula">r_e = 26mV/I_E &nbsp;| &nbsp;A_v = −RC/r_e (CE, with bypass cap)</div>
+  <div class="formula">I_D = I_DSS(1−VGS/VP)² &nbsp;&nbsp;[JFET Shockley equation]</div>
+  <div class="formula">DC load line: I_C(sat) = VCC/(RC+RE), V_CE(cutoff) = VCC</div>
+
+  <table>
+    <tr><th>Quantity</th><th>Symbol</th><th>Unit</th><th>What it means</th></tr>
+    <tr><td>Current</td><td>I</td><td>Ampere (A)</td><td>Flow of charge per second</td></tr>
+    <tr><td>Voltage</td><td>V</td><td>Volt (V)</td><td>Electrical "pressure"</td></tr>
+    <tr><td>Resistance</td><td>R</td><td>Ohm (Ω)</td><td>Opposition to current</td></tr>
+    <tr><td>Current gain</td><td>β or hFE</td><td>dimensionless</td><td>IC/IB in BJT</td></tr>
+    <tr><td>Transconductance</td><td>gm</td><td>Siemens (S)</td><td>ΔID/ΔVGS in JFET</td></tr>
+    <tr><td>Voltage gain</td><td>Av</td><td>dimensionless</td><td>Vout/Vin</td></tr>
+    <tr><td>Cut-in voltage</td><td>V_γ</td><td>Volt</td><td>Si≈0.7V, Ge≈0.3V</td></tr>
+  </table>
+</div>
+
+<div style="text-align:center; padding: 40px 0 60px; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: .8rem;">
+  DASC-316 / GNAS-316 &nbsp;·&nbsp; Electronic Devices &amp; Circuits &nbsp;·&nbsp; Batch 2k20–2k25<br>
+  Conventional Current Throughout &nbsp;·&nbsp; Study hard, understand deeper.
+</div>
+
+</div><!-- /container -->
+</body>
+</html>
