@@ -1398,24 +1398,230 @@
     <div class="text">"Negative RC over re = RC Reversed, inverted and amplified"</div>
   </div>
 
-  <h3>All Key Formulas</h3>
-  <div class="formula">I = Q/t &nbsp;| &nbsp;V = IR &nbsp;| &nbsp;P = IV</div>
-  <div class="formula">I_C = β × I_B &nbsp;| &nbsp;I_E = I_C + I_B &nbsp;| &nbsp;α = I_C/I_E = β/(β+1)</div>
-  <div class="formula">V_B = VCC × R2/(R1+R2) &nbsp;| &nbsp;V_E = V_B − 0.7V &nbsp;| &nbsp;I_E = V_E/RE</div>
-  <div class="formula">V_CE = VCC − I_C(RC+RE) &nbsp;&nbsp;[DC load line equation]</div>
-  <div class="formula">r_e = 26mV/I_E &nbsp;| &nbsp;A_v = −RC/r_e (CE, with bypass cap)</div>
-  <div class="formula">I_D = I_DSS(1−VGS/VP)² &nbsp;&nbsp;[JFET Shockley equation]</div>
-  <div class="formula">DC load line: I_C(sat) = VCC/(RC+RE), V_CE(cutoff) = VCC</div>
+  <h3>All Key Formulas — Fully Explained</h3>
+
+  <!-- GROUP 1 -->
+  <div class="card blue" style="margin-top:18px;">
+    <h4>Group 1 — The Three Fundamental Laws of Electricity</h4>
+
+    <div class="formula">① &nbsp; I = Q / t</div>
+    <p>
+      <strong>What it means:</strong> Current (I) equals the total electric charge (Q) that flows past a point, divided by the time (t) taken.<br>
+      <strong>Why it works:</strong> Current is not a thing that sits still — it is a <em>rate of flow</em>. Just like water flow in a pipe is measured in litres per second, electric current is measured in coulombs per second. One ampere literally means "one coulomb of charge passes every second."<br>
+      <strong>Example:</strong> If 6 coulombs of charge flows through a wire in 3 seconds → I = 6/3 = <strong>2 A</strong>.<br>
+      <strong>Real life:</strong> When you plug in a phone charger rated 2A, 2 coulombs of charge is being pushed through the circuit every second.
+    </p>
+
+    <div class="formula">② &nbsp; V = I × R &nbsp;&nbsp;(Ohm's Law)</div>
+    <p>
+      <strong>What it means:</strong> The voltage (V) across a component equals the current (I) flowing through it multiplied by its resistance (R).<br>
+      <strong>Why it works:</strong> Resistance is opposition to current flow — like friction in a pipe. The more resistance, the more "pressure" (voltage) you need to push the same amount of current through. Georg Ohm discovered that for most materials, this relationship is perfectly linear.<br>
+      <strong>Example:</strong> A resistor of 100 Ω carrying 0.05 A → V = 0.05 × 100 = <strong>5 V</strong> drop across it.<br>
+      <strong>Real life:</strong> The heating element in a toaster has high resistance — this converts electrical energy into heat (I² × R = power dissipated as heat).<br>
+      <strong>Rearrangements:</strong> I = V/R (find current) &nbsp;|&nbsp; R = V/I (find resistance)
+    </p>
+
+    <div class="formula">③ &nbsp; P = I × V</div>
+    <p>
+      <strong>What it means:</strong> Power (P) consumed or delivered equals current (I) times voltage (V).<br>
+      <strong>Why it works:</strong> Voltage is energy per unit charge; current is charge per unit time. Multiply them and the "charge" cancels: you get energy per unit time = power (watts).<br>
+      <strong>Other forms:</strong> P = I²R (pure resistive heating) &nbsp;|&nbsp; P = V²/R<br>
+      <strong>Example:</strong> A 12V LED draws 0.5A → P = 12 × 0.5 = <strong>6 W</strong>.<br>
+      <strong>Real life:</strong> Your electricity bill is based on kilo-watt-hours (kWh) — power × time. A 1000W microwave running for 1 hour = 1 kWh.
+    </p>
+  </div>
+
+  <!-- GROUP 2 -->
+  <div class="card orange" style="margin-top:18px;">
+    <h4>Group 2 — BJT Transistor Current Relationships</h4>
+
+    <div class="formula">④ &nbsp; I_C = β × I_B</div>
+    <p>
+      <strong>What it means:</strong> The collector current (I_C) equals beta (β) times the base current (I_B).<br>
+      <strong>Why it works:</strong> In an NPN BJT, a small base current injects minority carriers into the thin base region. Most of these (about 98–99%) are swept across into the collector by the reverse-biased collector junction. Only a tiny fraction recombines and exits through the base. The ratio of how many make it to the collector vs how many you injected via the base = β (beta), the current gain.<br>
+      <strong>β is typically 50–300</strong> depending on the transistor.<br>
+      <strong>Example:</strong> β = 200, I_B = 30 μA → I_C = 200 × 30 μA = <strong>6 mA</strong>. You controlled 6 mA with only 30 μA — a 200× amplification!<br>
+      <strong>Real life:</strong> A microphone signal (microamperes) drives the base; the collector current (milliamperes) drives a speaker. That's an audio amplifier.
+    </p>
+
+    <div class="formula">⑤ &nbsp; I_E = I_C + I_B</div>
+    <p>
+      <strong>What it means:</strong> The emitter current (I_E) is the sum of collector current and base current.<br>
+      <strong>Why it works:</strong> Kirchhoff's Current Law (KCL) — current in = current out. All current that enters the transistor via collector and base must exit via the emitter (in NPN). No charge is created or destroyed inside.<br>
+      <strong>Key insight:</strong> Since β is large (50–300), I_B is tiny compared to I_C, so I_E ≈ I_C in most calculations.<br>
+      <strong>Example:</strong> I_C = 6 mA, I_B = 30 μA = 0.03 mA → I_E = 6 + 0.03 = <strong>6.03 mA ≈ 6 mA</strong>.
+    </p>
+
+    <div class="formula">⑥ &nbsp; α = I_C / I_E = β / (β + 1)</div>
+    <p>
+      <strong>What it means:</strong> Alpha (α) is the fraction of emitter current that makes it to the collector. It is always slightly less than 1.<br>
+      <strong>Why it works:</strong> Not all carriers injected from emitter reach the collector — a small fraction recombines in the base (becoming I_B). Alpha measures efficiency of this transfer. For β = 100: α = 100/101 = 0.99 (99% efficiency).<br>
+      <strong>Alpha is used in Common-Base configuration analysis.</strong><br>
+      <strong>Relationship:</strong> β = α/(1−α) &nbsp;|&nbsp; α = β/(β+1)
+    </p>
+  </div>
+
+  <!-- GROUP 3 -->
+  <div class="card purple" style="margin-top:18px;">
+    <h4>Group 3 — Voltage Divider Bias (Setting the DC Q-Point)</h4>
+
+    <div class="formula">⑦ &nbsp; V_B = VCC × R2 / (R1 + R2)</div>
+    <p>
+      <strong>What it means:</strong> The base voltage (V_B) is set by a voltage divider made of resistors R1 (from VCC to base) and R2 (from base to ground).<br>
+      <strong>Why it works:</strong> R1 and R2 form a potential divider. The voltage at their junction = total voltage × (lower resistor / total resistance). This gives a stable, predictable base voltage independent of transistor variations.<br>
+      <strong>Why we need it:</strong> The base voltage sets where the transistor operates (the Q-point). Without bias, the transistor won't amplify correctly — it would be in cutoff (off) or saturation (fully on).<br>
+      <strong>Example:</strong> VCC = 12V, R1 = 10 kΩ, R2 = 2.2 kΩ → V_B = 12 × 2.2 / (10 + 2.2) = <strong>2.16 V</strong>
+    </p>
+
+    <div class="formula">⑧ &nbsp; V_E = V_B − 0.7V</div>
+    <p>
+      <strong>What it means:</strong> The emitter voltage (V_E) is always 0.7V less than the base voltage (for silicon transistors).<br>
+      <strong>Why it works:</strong> The base-emitter junction is a forward-biased diode. As we learned, a silicon diode has a fixed 0.7V drop when forward biased. So the emitter sits 0.7V below the base at all times (in active region). For germanium transistors, use 0.3V instead.<br>
+      <strong>Example:</strong> V_B = 2.16V → V_E = 2.16 − 0.7 = <strong>1.46 V</strong>
+    </p>
+
+    <div class="formula">⑨ &nbsp; I_E = V_E / RE</div>
+    <p>
+      <strong>What it means:</strong> Emitter current equals the emitter voltage divided by the emitter resistor (RE).<br>
+      <strong>Why it works:</strong> Ohm's Law applied to the emitter resistor. One end of RE is at V_E; the other end is at ground (0V). So the voltage across RE = V_E − 0 = V_E. Current through it = V/R = V_E / RE.<br>
+      <strong>Why RE exists:</strong> RE provides thermal stability. If temperature rises and I_C tries to increase, I_E increases → V_E increases → V_BE = V_B − V_E decreases → I_B drops → I_C drops back. This is negative feedback.<br>
+      <strong>Example:</strong> V_E = 1.46V, RE = 1 kΩ → I_E = 1.46 / 1000 = <strong>1.46 mA</strong>
+    </p>
+  </div>
+
+  <!-- GROUP 4 -->
+  <div class="card gold" style="margin-top:18px;">
+    <h4>Group 4 — DC Load Line Equation</h4>
+
+    <div class="formula">⑩ &nbsp; V_CE = VCC − I_C × (RC + RE)</div>
+    <p>
+      <strong>What it means:</strong> The collector-emitter voltage (V_CE) equals the supply voltage (VCC) minus the voltage drops across RC and RE caused by collector current I_C.<br>
+      <strong>Why it works:</strong> Apply Kirchhoff's Voltage Law (KVL) around the collector loop: VCC = V_RC + V_CE + V_RE. The drops across RC and RE are both I_C × R (since I_C ≈ I_E). Rearranging gives V_CE = VCC − I_C(RC + RE).<br>
+      <strong>This is the equation of the DC load line</strong> — a straight line on the I_C vs V_CE graph with:<br>
+      &nbsp;• Slope = −1/(RC + RE)<br>
+      &nbsp;• x-intercept (I_C = 0): V_CE = VCC (cutoff point)<br>
+      &nbsp;• y-intercept (V_CE = 0): I_C = VCC/(RC + RE) (saturation point)<br>
+      <strong>Example:</strong> VCC = 12V, RC = 4.7kΩ, RE = 1kΩ, I_C = 1.46 mA → V_CE = 12 − 1.46 × 5.7 = 12 − 8.32 = <strong>3.68 V</strong>
+    </p>
+
+    <div class="formula">⑪ &nbsp; I_C(sat) = VCC / (RC + RE) &nbsp;&nbsp;and&nbsp;&nbsp; V_CE(cutoff) = VCC</div>
+    <p>
+      <strong>Saturation point — I_C(sat) = VCC / (RC + RE):</strong><br>
+      When V_CE = 0 (transistor fully ON, like a closed switch), all of VCC drops across RC and RE. Maximum possible current = VCC / (RC + RE). This is the top of the load line on the y-axis.<br>
+      <strong>Example:</strong> VCC = 12V, RC + RE = 5.7kΩ → I_C(sat) = 12/5700 = <strong>2.1 mA</strong><br><br>
+      <strong>Cutoff point — V_CE(cutoff) = VCC:</strong><br>
+      When I_C = 0 (transistor fully OFF, like an open switch), no current flows so there is zero voltage drop across RC and RE. All of VCC appears across the transistor itself → V_CE = VCC. This is the rightmost point of the load line on the x-axis.<br>
+      <strong>The Q-point must sit between these two extremes on the load line.</strong>
+    </p>
+  </div>
+
+  <!-- GROUP 5 -->
+  <div class="card green" style="margin-top:18px;">
+    <h4>Group 5 — AC Analysis Formulas</h4>
+
+    <div class="formula">⑫ &nbsp; r_e = 26 mV / I_E</div>
+    <p>
+      <strong>What it means:</strong> The dynamic (AC) emitter resistance (r_e) equals 26 millivolts divided by the DC emitter current I_E.<br>
+      <strong>Why it works:</strong> The diode equation (Shockley) shows that the small-signal resistance of a forward-biased P-N junction depends on the DC current passing through it: r_e = V_T / I_E, where V_T = kT/q = thermal voltage ≈ 26 mV at room temperature (25°C). k = Boltzmann's constant, T = temperature in Kelvin, q = electron charge. This is a fundamental result from semiconductor physics — the resistance a tiny AC signal "sees" at the emitter junction.<br>
+      <strong>Key insight:</strong> Higher I_E → lower r_e → higher voltage gain. So biasing at higher current gives more gain (but also more power consumption).<br>
+      <strong>Example:</strong> I_E = 1.46 mA → r_e = 26 mV / 1.46 mA = <strong>17.8 Ω</strong>
+    </p>
+
+    <div class="formula">⑬ &nbsp; A_v = −RC / r_e &nbsp;&nbsp;(CE amplifier with emitter bypass capacitor)</div>
+    <p>
+      <strong>What it means:</strong> The AC voltage gain (A_v) of a Common-Emitter amplifier equals negative RC divided by r_e.<br>
+      <strong>Why it works:</strong> In the AC small-signal model, the transistor's emitter sees resistance r_e. The input signal appears across r_e (at the base-emitter junction). The output appears across RC (collector to ground via coupling cap). By the transistor action, a voltage v_in across r_e produces a current v_in/r_e through RC, making output voltage = −(v_in/r_e) × RC. So A_v = Vout/Vin = −RC/r_e.<br>
+      <strong>The negative sign:</strong> CE amplifier inverts the signal — when input goes positive, output goes negative. This is 180° phase shift.<br>
+      <strong>Why bypass cap (CE) matters:</strong> Without CE in parallel with RE, the AC signal also "sees" RE, reducing gain: A_v = −RC/(r_e + RE). With CE, RE is shorted for AC, maximising gain to −RC/r_e.<br>
+      <strong>Example:</strong> RC = 4.7 kΩ, r_e = 17.8 Ω → A_v = −4700/17.8 = <strong>−264</strong> (264× amplification with inversion)
+    </p>
+  </div>
+
+  <!-- GROUP 6 -->
+  <div class="card blue" style="margin-top:18px;">
+    <h4>Group 6 — JFET Shockley Equation</h4>
+
+    <div class="formula">⑭ &nbsp; I_D = I_DSS × (1 − VGS / VP)²</div>
+    <p>
+      <strong>What it means:</strong> The drain current (I_D) in a JFET depends on the gate-source voltage (VGS). As VGS becomes more negative (for N-channel), I_D decreases parabolically until it reaches zero at the pinch-off voltage VP.<br>
+      <strong>Breaking it down symbol by symbol:</strong><br>
+      &nbsp;• <strong>I_D</strong> = Drain Current — the actual current flowing through the JFET channel at a given VGS<br>
+      &nbsp;• <strong>I_DSS</strong> = Drain-to-Source current with gate Shorted (VGS = 0). This is the <em>maximum</em> current the JFET can carry. Typically in datasheets.<br>
+      &nbsp;• <strong>VGS</strong> = Gate-to-Source Voltage — the control voltage. For N-channel: VGS is 0 or negative. For P-channel: 0 or positive.<br>
+      &nbsp;• <strong>VP</strong> = Pinch-off Voltage (also called VGS(off)) — the gate voltage at which the channel is completely pinched off and I_D = 0.<br>
+      &nbsp;• The <strong>(1 − VGS/VP)²</strong> term is a parabola — a squared relationship, so small changes near VP have less effect than changes near VGS = 0.<br>
+      <strong>Why squared?</strong> Because the depletion region width grows proportionally with VGS, and the channel is depletion on both sides — the effective channel width decreases as a square law, hence current (proportional to area) decreases as a square.<br>
+      <strong>Example:</strong> I_DSS = 10 mA, VP = −4V, VGS = −2V → I_D = 10 × (1 − (−2)/(−4))² = 10 × (1 − 0.5)² = 10 × 0.25 = <strong>2.5 mA</strong><br>
+      <strong>Check boundary:</strong> At VGS = 0 → I_D = I_DSS = 10 mA ✓ &nbsp; At VGS = VP = −4V → I_D = 0 ✓
+    </p>
+  </div>
+
+  <!-- ABBREVIATIONS TABLE -->
+  <h3 style="margin-top:36px;">📖 Full Forms — Every Abbreviation in This Course</h3>
+  <p style="margin-bottom:12px; color:var(--muted); font-size:.93rem;">Every symbol, abbreviation, and acronym used in these formulas, fully spelled out with context.</p>
 
   <table>
-    <tr><th>Quantity</th><th>Symbol</th><th>Unit</th><th>What it means</th></tr>
-    <tr><td>Current</td><td>I</td><td>Ampere (A)</td><td>Flow of charge per second</td></tr>
-    <tr><td>Voltage</td><td>V</td><td>Volt (V)</td><td>Electrical "pressure"</td></tr>
-    <tr><td>Resistance</td><td>R</td><td>Ohm (Ω)</td><td>Opposition to current</td></tr>
-    <tr><td>Current gain</td><td>β or hFE</td><td>dimensionless</td><td>IC/IB in BJT</td></tr>
-    <tr><td>Transconductance</td><td>gm</td><td>Siemens (S)</td><td>ΔID/ΔVGS in JFET</td></tr>
-    <tr><td>Voltage gain</td><td>Av</td><td>dimensionless</td><td>Vout/Vin</td></tr>
-    <tr><td>Cut-in voltage</td><td>V_γ</td><td>Volt</td><td>Si≈0.7V, Ge≈0.3V</td></tr>
+    <tr><th>Symbol / Abbreviation</th><th>Full Form</th><th>Unit</th><th>Quick Description</th></tr>
+    <!-- Basic -->
+    <tr><td>I</td><td>Current (Electric Current)</td><td>Ampere (A)</td><td>Rate of charge flow; conventional current flows + to −</td></tr>
+    <tr><td>Q</td><td>Charge (Electric Charge)</td><td>Coulomb (C)</td><td>Amount of electricity; 1C = charge of ~6.24×10¹⁸ electrons</td></tr>
+    <tr><td>t</td><td>Time</td><td>Second (s)</td><td>Duration over which charge flows</td></tr>
+    <tr><td>V</td><td>Voltage (Electric Potential Difference)</td><td>Volt (V)</td><td>Electrical "pressure" driving current</td></tr>
+    <tr><td>R</td><td>Resistance</td><td>Ohm (Ω)</td><td>Opposition to current flow</td></tr>
+    <tr><td>P</td><td>Power</td><td>Watt (W)</td><td>Rate of energy consumption or delivery</td></tr>
+    <!-- BJT -->
+    <tr><td>BJT</td><td>Bipolar Junction Transistor</td><td>—</td><td>Uses both electrons &amp; holes; current-controlled device</td></tr>
+    <tr><td>I_C</td><td>Collector Current</td><td>Ampere / mA</td><td>Large controlled current in BJT; output current</td></tr>
+    <tr><td>I_B</td><td>Base Current</td><td>Ampere / μA</td><td>Small control current injected at base terminal</td></tr>
+    <tr><td>I_E</td><td>Emitter Current</td><td>Ampere / mA</td><td>Total current exiting emitter; I_E = I_C + I_B</td></tr>
+    <tr><td>β (beta)</td><td>Current Gain (also written h_FE)</td><td>Dimensionless</td><td>Ratio I_C / I_B; how much base current is amplified (50–300)</td></tr>
+    <tr><td>h_FE</td><td>Hybrid Forward Current gain (common Emitter)</td><td>Dimensionless</td><td>Same as β; comes from h-parameter transistor model</td></tr>
+    <tr><td>α (alpha)</td><td>Common-Base Current Gain</td><td>Dimensionless</td><td>Ratio I_C / I_E; always &lt;1, typically ~0.99</td></tr>
+    <tr><td>NPN</td><td>Negative-Positive-Negative</td><td>—</td><td>BJT type: N-emitter, P-base, N-collector sandwich</td></tr>
+    <tr><td>PNP</td><td>Positive-Negative-Positive</td><td>—</td><td>BJT type: P-emitter, N-base, P-collector sandwich</td></tr>
+    <!-- Bias -->
+    <tr><td>VCC</td><td>Voltage at Common Collector (supply voltage)</td><td>Volt</td><td>DC power supply for BJT circuit; positive rail</td></tr>
+    <tr><td>V_B</td><td>Base Voltage</td><td>Volt</td><td>DC voltage at the base terminal w.r.t. ground</td></tr>
+    <tr><td>V_E</td><td>Emitter Voltage</td><td>Volt</td><td>DC voltage at emitter terminal w.r.t. ground</td></tr>
+    <tr><td>V_BE</td><td>Base-to-Emitter Voltage</td><td>Volt</td><td>Junction forward voltage; 0.7V for Si, 0.3V for Ge</td></tr>
+    <tr><td>V_CE</td><td>Collector-to-Emitter Voltage</td><td>Volt</td><td>Voltage across transistor output; defines operating region</td></tr>
+    <tr><td>R1, R2</td><td>Bias Resistors (Voltage Divider)</td><td>Ohm (Ω)</td><td>Resistor network that sets V_B; R1 from VCC, R2 to ground</td></tr>
+    <tr><td>RC</td><td>Collector Resistor</td><td>Ohm (Ω)</td><td>Resistor in collector path; output voltage developed across it</td></tr>
+    <tr><td>RE</td><td>Emitter Resistor</td><td>Ohm (Ω)</td><td>Resistor in emitter path; provides thermal stability via feedback</td></tr>
+    <!-- Load line -->
+    <tr><td>I_C(sat)</td><td>Collector Current at Saturation</td><td>Ampere / mA</td><td>Max collector current; transistor fully ON; top of load line</td></tr>
+    <tr><td>V_CE(cutoff)</td><td>Collector-Emitter Voltage at Cutoff</td><td>Volt</td><td>Voltage when transistor fully OFF (I_C=0); bottom of load line</td></tr>
+    <tr><td>Q-point</td><td>Quiescent Operating Point</td><td>—</td><td>DC operating point (V_CEQ, I_CQ) with no AC signal; "resting" position</td></tr>
+    <!-- AC -->
+    <tr><td>r_e</td><td>Dynamic (AC) Emitter Resistance</td><td>Ohm (Ω)</td><td>Small-signal resistance at emitter junction = 26mV/I_E</td></tr>
+    <tr><td>V_T</td><td>Thermal Voltage</td><td>Volt (mV)</td><td>= kT/q ≈ 26 mV at 25°C; from semiconductor physics</td></tr>
+    <tr><td>A_v</td><td>Voltage Gain (AC)</td><td>Dimensionless</td><td>Ratio Vout/Vin; negative means 180° phase inversion</td></tr>
+    <tr><td>CE</td><td>Common Emitter (configuration)</td><td>—</td><td>Amplifier where emitter is shared terminal; high voltage + current gain</td></tr>
+    <tr><td>CB</td><td>Common Base (configuration)</td><td>—</td><td>Base is shared; current gain &lt;1, high voltage gain, high frequency use</td></tr>
+    <tr><td>CC</td><td>Common Collector (configuration)</td><td>—</td><td>Collector shared; also called "emitter follower"; voltage gain ≈ 1, buffer</td></tr>
+    <tr><td>RL</td><td>Load Resistance</td><td>Ohm (Ω)</td><td>External resistance connected to amplifier output (e.g. speaker)</td></tr>
+    <tr><td>C1, C2</td><td>Coupling Capacitors</td><td>Farad (F)</td><td>Block DC, pass AC; connect signal source and load to amplifier</td></tr>
+    <tr><td>CE (cap)</td><td>Emitter Bypass Capacitor</td><td>Farad (F)</td><td>Short-circuits RE for AC signals; maximises AC gain</td></tr>
+    <!-- JFET -->
+    <tr><td>JFET</td><td>Junction Field Effect Transistor</td><td>—</td><td>Voltage-controlled; uses only majority carriers (unipolar)</td></tr>
+    <tr><td>I_D</td><td>Drain Current</td><td>Ampere / mA</td><td>Current flowing from drain to source through the channel</td></tr>
+    <tr><td>I_DSS</td><td>Drain-to-Source current (gate Shorted)</td><td>Ampere / mA</td><td>Maximum drain current; occurs when VGS = 0</td></tr>
+    <tr><td>VGS</td><td>Gate-to-Source Voltage</td><td>Volt</td><td>Control voltage in JFET; negative for N-channel to reduce I_D</td></tr>
+    <tr><td>VP</td><td>Pinch-off Voltage (also VGS(off))</td><td>Volt</td><td>VGS value that completely closes the channel; I_D → 0</td></tr>
+    <tr><td>G, D, S</td><td>Gate, Drain, Source</td><td>—</td><td>Three terminals of a JFET (analogous to Base, Collector, Emitter in BJT)</td></tr>
+    <tr><td>g_m</td><td>Transconductance</td><td>Siemens (S) or mA/V</td><td>Ratio ΔI_D / ΔVGS; measures JFET's ability to convert voltage to current</td></tr>
+    <!-- Other -->
+    <tr><td>KVL</td><td>Kirchhoff's Voltage Law</td><td>—</td><td>Sum of all voltages around a closed loop = 0</td></tr>
+    <tr><td>KCL</td><td>Kirchhoff's Current Law</td><td>—</td><td>Sum of all currents entering a node = sum leaving</td></tr>
+    <tr><td>AC</td><td>Alternating Current</td><td>—</td><td>Current that periodically reverses direction (e.g. mains 50/60 Hz)</td></tr>
+    <tr><td>DC</td><td>Direct Current</td><td>—</td><td>Current that flows in only one direction (e.g. battery)</td></tr>
+    <tr><td>Si</td><td>Silicon</td><td>—</td><td>Most common semiconductor; band gap 1.1 eV; V_BE = 0.7V</td></tr>
+    <tr><td>Ge</td><td>Germanium</td><td>—</td><td>Older semiconductor; band gap 0.66 eV; V_BE = 0.3V</td></tr>
+    <tr><td>eV</td><td>Electron Volt</td><td>Energy</td><td>Energy gained by 1 electron moving through 1 volt; 1 eV = 1.6×10⁻¹⁹ J</td></tr>
+    <tr><td>PCB</td><td>Printed Circuit Board</td><td>—</td><td>Board with etched copper tracks connecting electronic components</td></tr>
+    <tr><td>IC</td><td>Integrated Circuit</td><td>—</td><td>Millions of transistors, resistors etc. on a single silicon chip</td></tr>
+    <tr><td>RF</td><td>Radio Frequency</td><td>Hz</td><td>High frequency signals used in wireless communication</td></tr>
+    <tr><td>Op-Amp</td><td>Operational Amplifier</td><td>—</td><td>High-gain differential amplifier built from many BJTs/JFETs</td></tr>
   </table>
 </div>
 
